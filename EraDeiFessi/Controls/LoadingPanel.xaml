@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="EraDeiFessi.Controls.LoadingPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" IsVisibleChanged="UserControl_IsVisibleChanged">
+    
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center">
+        <Image x:Name="loadingGIF" Height="32" Width="32" HorizontalAlignment="Center" VerticalAlignment="Center" Source="..\Resources\icon_loading.png" IsEnabled="False">
+            <Image.RenderTransform>
+                <RotateTransform x:Name="transform" CenterX="16" CenterY="16" />
+            </Image.RenderTransform>
+            <Image.Style>
+                <Style>
+                    <Style.Triggers>
+                        <Trigger Property="Image.IsEnabled" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="sbloop">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                    Storyboard.TargetProperty="RenderTransform.Angle"
+                                    From="0"
+                                    To="360"
+                                    Duration="0:0:1"
+                                    RepeatBehavior="Forever" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            
+                            <Trigger.ExitActions>
+                                <RemoveStoryboard BeginStoryboardName="sbloop"/>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+    </Grid>
+</UserControl>

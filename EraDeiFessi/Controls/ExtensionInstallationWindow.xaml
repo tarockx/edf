@@ -1,0 +1,42 @@
+﻿<Window x:Class="EraDeiFessi.Controls.ExtensionInstallationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Estensione per Chrome" Height="400" Width="450">
+    <Grid>
+        <GroupBox Header="Estensione per Chrome - istruzioni di installazione" Margin="3">
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Center" FontSize="14" TextAlignment="Center" TextWrapping="Wrap" Margin="0 5 0 20">
+                L'estensione EraDeiFessi per Chrome permette di inviare la pagina attualmente aperta nel browser direttamente al Link Unblocker di EraDeiFessi.
+                </TextBlock>
+                
+                
+                <TextBlock HorizontalAlignment="Center" FontSize="16" TextAlignment="Center">
+                <Bold>Procedura di installazione</Bold>
+                </TextBlock>
+
+                <TextBlock HorizontalAlignment="Left" FontSize="14" TextWrapping="Wrap">
+                    <Bold>1. </Bold> Trovare il pacchetto "EraDeiFessi4Chrome.crx" nella cartella di installazione di EraDeiFessi (<Hyperlink Click="showExtension_Click">mostra in risorse del computer</Hyperlink>)
+                </TextBlock>
+
+                <TextBlock HorizontalAlignment="Left" FontSize="14" TextWrapping="Wrap">
+                    <Bold>2. </Bold> Aprire la pagina di gestione delle estensioni di Chrome (Menu -> Strumenti -> Estensioni)
+                </TextBlock>
+
+                <TextBlock HorizontalAlignment="Left" FontSize="14" TextWrapping="Wrap">
+                    <Bold>3. </Bold> Trascinare il file EraDeiFessi4Chrome.crx individuato al punto 1 nella pagina di gestione delle estensioni di Chrome aperta al punto 2 e confermare l'installazione dell'estensione
+                </TextBlock>
+
+                <TextBlock HorizontalAlignment="Center" FontSize="16" TextAlignment="Center" Margin="0 10 0 0">
+                <Bold>L'estensione sarà ora installata!</Bold>
+                </TextBlock>
+                
+                <TextBlock HorizontalAlignment="Center" FontSize="12" TextAlignment="Center" TextWrapping="Wrap">
+                Da qualsiasi pagina di un sito supportato da RealDebrid fare click sull'icona dell'estensione per sbloccare il link in EraDeiFessi
+                </TextBlock>
+                
+                <Button Margin="0 5 0 0" HorizontalAlignment="Center" Height="28" Width="200" Content="Chiudi" Click="btnClose_Click"/>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>
+

@@ -1,0 +1,49 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.Master.cs" Inherits="EraDeiFessi.WebFormsApp.Master" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Era Dei Fessi MOBILE - by Master_T</title>
+    <link rel="shortcut icon" href="Resources/app_icon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/theme-bootstrap-readable.css" rel="stylesheet" />
+    <link href="Content/edfStyle.css" rel="stylesheet" />
+    <link href="Content/typeahead-bs3.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.9.1.js"></script>
+</head>
+<body>
+    <div id="wrap">
+    <form id="form1" runat="server">
+        <%--<asp:ScriptManager runat="server" ID="searchScriptManager" AsyncPostBackTimeout="6000" EnableHistory="true"/>--%>
+
+        <div class="fullHeight">
+            <div class="page-header page-header-style">
+                <div class="row">
+                    <h3 class="col-xs-6">Era Dei Fessi <small>MOBILE</small></h3>
+                    <h3 class="col-xs-6 text-right"><small>by</small>Master_T</h3>
+                </div>
+            </div>
+
+            <asp:ContentPlaceHolder ID="mainContentPlaceholder" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+          
+      </div>
+    </div>    
+    <script src="Scripts/jquery-1.9.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <%--<script src="Scripts/bloodhound.js"></script>
+    <script src="Scripts/bootstrap3-typeahead.js"></script>--%>
+    <script src="http://twitter.github.com/typeahead.js/releases/latest/typeahead.bundle.js" ></script>
+    <script src="Scripts/edfScript.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReleaseInfoCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<release>
+		<Version>1.0.3.1</Version>
+		<Notes>
+			Supporto ai link multipli Real-Debrid (es: YouTube)
+		</Notes>
+	</release>
+	<release>
+		<Version>1.0.3.0</Version>
+		<Notes>
+			Nuova funzionalità: sblocca via Real-Debrid i link condivisi da altre app/browser
+		</Notes>
+	</release>
+	<release>
+		<Version>1.0.2.0</Version>
+		<Notes>
+			Riscritta la libreria di interazione con Real-Debrid per adeguarsi alle nuove API
+		</Notes>
+	</release>
+	<release>
+		<Version>1.0.1.0</Version>
+		<Notes>
+			Fix possibili crash durante il ripristino dell'app dal task manager
+			Fix minori all'interfaccia grafica
+		</Notes>
+	</release>
+	<release>
+		<Version>1.0.0.9</Version>
+		<Notes>
+			Icona rotonda
+			Fix crashall'apertura del menu impostazioni su alcuni dispositivi
+		</Notes>
+	</release>
+	<release>
+		<Version>1.0.0.8</Version>
+		<Notes>
+			Esteso il supporto dell'app a tutte le versioni di Android da Ice Cream Sandwich (4.0.3) in poi
+		</Notes>
+	</release>
+	<release>
+		<Version>1.0.0.7</Version>
+		<Notes>
+			Aggiunto menu opzioni, con la possibilità di scegliere quali plugin utilizzare
+			Fix pulsanti tagliati nel popup di notifica nuova versione
+			Fix minori all'interfaccia grafica
+		</Notes>
+	</release>
+	<release>
+		<Version>1.0.0.6</Version>
+		<Notes>
+			Fix al plug-in AllUC, i risultati pubblicitari sono ora filtrati dalla ricerca
+			Pressione prolungata su un suggerimento per copiarlo nella casella di ricerca
+		</Notes>
+	</release>
+	<release>
+		<Version>1.0.0.5</Version>
+		<Notes>
+			Aggiunto supporto per Cineblog01 e PirateStreaming Film
+		</Notes>
+	</release>
+	<release>
+		<Version>1.0.0.4</Version>
+		<Notes>
+			Implementato updater automatico
+		</Notes>
+	</release>
+	<release>
+		<Version>1.0.0.3</Version>
+		<Notes>
+			Bugfix e migliorie
+		</Notes>
+	</release>
+	<release>
+		<Version>1.0.0.1</Version>
+		<Notes>
+			Long-press actions sui risultati di ricerca
+			Bugfix vari
+		</Notes>
+	</release>
+	<release>
+		<Version>1.0.0.0</Version>
+		<Notes>
+			Prima versione di xEDF
+		</Notes>
+	</release>
+</ReleaseInfoCollection>

@@ -1,0 +1,144 @@
+﻿<UserControl x:Class="EraDeiFessi.Controls.TorrentOperations" x:Name="to1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EraDeiFessi.Controls"
+             xmlns:myControls="clr-namespace:EraDeiFessi.Controls"
+             xmlns:helpers="clr-namespace:EraDeiFessi.Helpers"
+             xmlns:torrent="clr-namespace:EraDeiFessi.Torrents"
+             xmlns:ragnar="clr-namespace:Ragnar;assembly=Ragnar"
+             mc:Ignorable="d">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <helpers:BandwidthSpeedFormatter x:Key="bandwidthConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Margin="2" Header="Link originale" x:Name="groupOriginalLink">
+            <StackPanel Margin="2 6 2 2" VerticalAlignment="Center" Orientation="Vertical" HorizontalAlignment="Center">
+                <Button Margin="2" Width="180" Height="25" Click="btnCopy_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <myControls:AutoGreyableImage Source="..\Resources\icon_clipboard.png" Margin="2"/>
+                        <TextBlock Margin="2" VerticalAlignment="Center">Copia link</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Margin="2" Width="180" Height="25" Click="btnOpenInBrowser_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <myControls:AutoGreyableImage Source="..\Resources\icon_chrome.png" Margin="2"/>
+                        <TextBlock Margin="2" VerticalAlignment="Center">Apri nel browser</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Margin="2" Grid.Column="1">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal" Margin="0">
+                    <TextBlock Margin="0">
+                        Stato del torrent: 
+                    </TextBlock>
+                    <TextBlock x:Name="tbStatus_Downloading" Text="in download" Margin="10 0 0 0" Foreground="Green" FontWeight="Bold"/>
+                    <TextBlock x:Name="tbStatus_Finished" Text="completato" Margin="10 0 0 0" Foreground="Blue" FontWeight="Bold"/>
+                    <TextBlock x:Name="tbStatus_Preparing" Text="in preparazione" Margin="10 0 0 0" Foreground="DarkGoldenrod" FontWeight="Bold"/>
+                    <TextBlock x:Name="tbStatus_Error" Text="errore" Margin="10 0 0 0" Foreground="Red" FontWeight="Bold"/>
+                </StackPanel>
+            </GroupBox.Header>
+
+            <Grid>
+                <!-- Loading message -->
+                <StackPanel Orientation="Horizontal" x:Name="panelLoading" Visibility="Hidden" Panel.ZIndex="9999" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 2 2 2">
+                    <myControls:LoadingPanel x:Name="loadingPanel1" Panel.ZIndex="9999" Grid.RowSpan="2"/>
+                    <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" TextAlignment="Center" TextWrapping="Wrap">
+                        [<Run Text="{Binding ElementName=to1, Path=Torrent.Progress, Mode=OneWay, StringFormat={}{0}%}" FontWeight="Bold" />] Operazione preliminare in corso: 
+                        <Run Text="{Binding ElementName=to1, Path=Torrent.StateString, Mode=OneWay}" FontWeight="Bold" />
+                    </TextBlock>
+                </StackPanel>
+
+                <!-- Multifile selection -->
+                <StackPanel Orientation="Vertical" Margin="2" x:Name="panelFileSelection" Visibility="Hidden">
+                    <TextBlock Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" TextAlignment="Center" TextWrapping="Wrap" Text="Il torrent selezionato contiene più di un file video. Scegliere quello che si desidera visionare:" />
+                    <StackPanel Margin="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <ComboBox Margin="2" Height="30" x:Name="comboFiles" Width="300" SelectionChanged="comboFiles_SelectionChanged" ItemsSource="{Binding ElementName=to1, Path=AvailableFiles}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Margin="2" Text="{Binding Path}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button Margin="2" Width="90" Height="30" x:Name="btnSelectFile" Click="btnSelectFile_Click" HorizontalAlignment="Right" IsEnabled="False">
+                            <StackPanel Orientation="Horizontal">
+                                <myControls:AutoGreyableImage Source="..\Resources\icon_go.png" Margin="2"/>
+                                <TextBlock Margin="2" VerticalAlignment="Center">Conferma</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+                
+                <!-- Download progress and status -->
+                <Grid x:Name="gridDownloading" Visibility="Visible">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Progressbar and status readings-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="Velocità: " Margin="2"/>
+                            <TextBlock FontWeight="Bold" Margin="2" Text="{Binding ElementName=to1, Path=Torrent.Speed, Converter={StaticResource bandwidthConverter}}" />
+                            <TextBlock Text=" - Completamento: " Margin="2"/>
+                            <TextBlock FontWeight="Bold" Margin="2" Text="{Binding ElementName=to1, Path=Torrent.PercentDone, StringFormat={}{0}%}" />
+                            <TextBlock Text=" - Seed: " Margin="2"/>
+                            <TextBlock FontWeight="Bold" Margin="2" Text="{Binding ElementName=to1, Path=Torrent.Seeds}" Foreground="DarkGreen" />
+                            <TextBlock Text=" - Peer: " Margin="2"/>
+                            <TextBlock FontWeight="Bold" Margin="2" Text="{Binding ElementName=to1, Path=Torrent.Peers}" Foreground="Blue" />
+                        </StackPanel>
+
+                        <ProgressBar x:Name="pbDownload" Margin="2 0 2 6" Grid.Row="1" Height="25" Maximum="100" Minimum="0" Value="{Binding ElementName=to1, Path=Torrent.PercentDone, Mode=OneWay}" />
+                    </Grid>
+
+                    <!-- Stream Buttons -->
+                    <StackPanel Margin="2" VerticalAlignment="Center" Orientation="Vertical" HorizontalAlignment="Center" x:Name="panelStatus" Grid.Column="1">
+
+                        <Button Margin="2" Width="180" Height="25" x:Name="btnRDStreamPot" Click="btnRDStreamPot_Click" IsEnabled="False">
+                            <StackPanel Orientation="Horizontal">
+                                <myControls:AutoGreyableImage Source="..\Resources\icon_potplayer.png" Margin="2"/>
+                                <TextBlock Margin="2" VerticalAlignment="Center">Stream (PotPlayer)</TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button Margin="2" Width="180" Height="25" x:Name="btnRDStreamVLC" Click="btnRDStreamVLC_Click" IsEnabled="False">
+                            <StackPanel Orientation="Horizontal">
+                                <myControls:AutoGreyableImage Source="..\Resources\icon_vlc.png" Margin="2"/>
+                                <TextBlock Margin="2" VerticalAlignment="Center">Stream (VLC)</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <GroupBox Margin="2" Header="Info" Grid.Column="1" Width="180" x:Name="groupNoVideoInfo">
+                        <TextBlock Text="Streaming non disponibile. Il torrent non contiene file video!" TextWrapping="Wrap" />
+                    </GroupBox>
+                </Grid>
+
+                <!-- Error message-->
+                <StackPanel Margin="2" VerticalAlignment="Center" Orientation="Vertical" HorizontalAlignment="Center" x:Name="panelError" Visibility="Hidden">
+                    <TextBlock Margin="2" Text="ERRORE" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Center" TextAlignment="Center"/>
+                    <TextBlock Margin="2" x:Name="lblError" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Grid>
+            
+        </GroupBox>
+    </Grid>
+</UserControl>

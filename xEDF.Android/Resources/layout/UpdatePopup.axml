@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Aggiornamento disponibile!"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" />
+    <ScrollView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView1"
+        android:layout_weight="1">
+        <TextView
+            android:text="Text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/txtUpdateMessage"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="10dp" />
+    </ScrollView>
+    <Button
+        android:text="Aggiorna ora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnUpdateNow"
+        style="@android:style/Widget.Material.Button.Borderless.Colored"
+        android:layout_gravity="right" />
+    <Button
+        android:text="No, non adesso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnUpdateNotNow"
+        style="@android:style/Widget.Material.Button.Borderless.Colored"
+        android:layout_gravity="right" />
+    <Button
+        android:text="No, e non chiedermelo più"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnUpdateDontAskAgain"
+        android:layout_gravity="right"
+        style="@android:style/Widget.Material.Button.Borderless.Colored" />
+</LinearLayout>

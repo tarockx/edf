@@ -1,0 +1,32 @@
+﻿<Window x:Class="EraDeiFessi.Controls.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:EraDeiFessi"
+        Title="Informazioni su..." Height="200" Width="300">
+    <Grid>
+        <GroupBox Header="About" Margin="3">
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Center" FontSize="20" TextAlignment="Center">
+                <Bold>Era dei Fessi</Bold>
+                </TextBlock>
+
+                <TextBlock HorizontalAlignment="Center">
+                Versione <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static local:Constants.Version}}"/> <LineBreak/>
+                </TextBlock>
+
+                <TextBlock HorizontalAlignment="Center" FontSize="14">
+                By <Bold>Master_T</Bold>
+                </TextBlock>
+
+                <TextBlock TextAlignment="Center" Margin="3" FontSize="16">
+                    <Hyperlink NavigateUri="https://eradeifessi.codeplex.com/" Click="Hyperlink_Click">Homepage e contatti</Hyperlink>
+                </TextBlock>
+
+                <TextBlock TextAlignment="Center" Margin="3" FontSize="16">
+                    <Hyperlink NavigateUri="http://eradeifessi.azurewebsites.net/" Click="HyperlinkWa_Click">WebApp</Hyperlink>
+                </TextBlock>
+
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>

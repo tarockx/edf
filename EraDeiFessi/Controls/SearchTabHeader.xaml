@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="EraDeiFessi.Controls.SearchTabHeader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+        <Image x:Name="loadingGIF" Height="12" Width="12" HorizontalAlignment="Left" VerticalAlignment="Center" Source="..\Resources\icon_loading.png" IsEnabled="False" Margin="2" IsVisibleChanged="UserControl_IsVisibleChanged">
+                <Image.RenderTransform>
+                    <RotateTransform CenterX="6" CenterY="6" />
+                </Image.RenderTransform>
+                <Image.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <Trigger Property="Image.IsEnabled" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard x:Name="sbloop">
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                    Storyboard.TargetProperty="RenderTransform.Angle"
+                                    From="0"
+                                    To="360"
+                                    Duration="0:0:1"
+                                    RepeatBehavior="Forever" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+
+                                <Trigger.ExitActions>
+                                    <RemoveStoryboard BeginStoryboardName="sbloop"/>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+
+            <TextBlock x:Name="tbTitle"></TextBlock>
+            <TextBlock x:Name="tbCounter" FontWeight="Bold"></TextBlock>
+        </StackPanel>
+</UserControl>

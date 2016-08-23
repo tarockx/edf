@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FFBAD596-76B0-4F9D-B26F-337824AD37F5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EraDeiFessi</RootNamespace>
+    <AssemblyName>EraDeiFessi</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <SupportUrl>https://eradeifessi.codeplex.com</SupportUrl>
+    <ProductName>Era dei Fessi</ProductName>
+    <PublisherName>Master_T</PublisherName>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>555B4D2B94801B5EBA9A7F8C3D32049EA2D81E29</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>EraDeiFessi_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>EraDeiFessi.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app1.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification">
+      <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net45\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.SHDocVw">
+      <HintPath>..\packages\WatiN.2.1.0\lib\net40\Interop.SHDocVw.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetZip.1.9.3\lib\net20\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <Private>True</Private>
+      <HintPath>..\packages\WatiN.2.1.0\lib\net40\Microsoft.mshtml.dll</HintPath>
+    </Reference>
+    <Reference Include="Ragnar, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ReferencesRepo\ragnar\Ragnar.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WatiN.Core, Version=2.1.0.1196, Culture=neutral, PublicKeyToken=db7cfd3acb5ad44e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WatiN.2.1.0\lib\net40\WatiN.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WpfControls">
+      <HintPath>..\ReferencesRepo\wpf\WpfControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Constants.cs" />
+    <Compile Include="Controls\AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AutoGrayableImage.cs" />
+    <Compile Include="Controls\BookmarkManager.xaml.cs">
+      <DependentUpon>BookmarkManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EnableServiceDialog.xaml.cs">
+      <DependentUpon>EnableServiceDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ExtensionInstallationWindow.xaml.cs">
+      <DependentUpon>ExtensionInstallationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LinkOperations.xaml.cs">
+      <DependentUpon>LinkOperations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LinkUnblocker.xaml.cs">
+      <DependentUpon>LinkUnblocker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LoadingPanel.xaml.cs">
+      <DependentUpon>LoadingPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BookmarkListControl.xaml.cs">
+      <DependentUpon>BookmarkListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RealDebridAuthenticationWizard.xaml.cs">
+      <DependentUpon>RealDebridAuthenticationWizard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SearchTabHeader.xaml.cs">
+      <DependentUpon>SearchTabHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SubtitleSearch.xaml.cs">
+      <DependentUpon>SubtitleSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TorrentOperations.xaml.cs">
+      <DependentUpon>TorrentOperations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UpdateDialog.xaml.cs">
+      <DependentUpon>UpdateDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Converters.cs" />
+    <Compile Include="Helpers\GoogleSuggestionsProvider.cs" />
+    <Compile Include="Helpers\HistoryManager.cs" />
+    <Compile Include="Helpers\IOHelper.cs" />
+    <Compile Include="Helpers\VisualTreeHelpers.cs" />
+    <Compile Include="Parser\WebBypasser.cs" />
+    <Compile Include="Repository\MySettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>MySettings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Repo.cs" />
+    <Compile Include="Repository\SettingsRepo.cs" />
+    <Compile Include="SingleInstance.cs" />
+    <Compile Include="Torrents\TorrentsManager.cs" />
+    <Compile Include="Torrents\TorrentWrapper.cs" />
+    <Compile Include="Updater\CheckForUpdatesResponse.cs" />
+    <Compile Include="Updater\ReleaseInfo.cs" />
+    <Compile Include="Updater\Updater.cs" />
+    <Compile Include="Utilities.cs" />
+    <Compile Include="Webservice\EDFServices.cs" />
+    <Compile Include="Webservice\IEDFServices.cs" />
+    <Compile Include="Webservice\ServicesManager.cs" />
+    <Page Include="Controls\AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BookmarkManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EnableServiceDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ExtensionInstallationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LinkOperations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LinkUnblocker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LoadingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BookmarkListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RealDebridAuthenticationWizard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SearchTabHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SubtitleSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TorrentOperations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UpdateDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app1.manifest" />
+    <None Include="EraDeiFessi_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Repository\MySettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>MySettings.Designer.cs</LastGenOutput>
+    </None>
+    <EmbeddedResource Include="Resources\uninstall.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_chrome.png" />
+    <Resource Include="Resources\icon_potplayer.png" />
+    <Resource Include="Resources\icon_rd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_clipboard.png" />
+    <Resource Include="Resources\icon_idm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\loader.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PropGrid4WPF\PropGrid4WPF\PropGrid4WPF.csproj">
+      <Project>{00015351-5ea1-45c0-968c-fe1b383ae577}</Project>
+      <Name>PropGrid4WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HtmlAgilityPack\HtmlAgilityPack.csproj">
+      <Project>{193bb801-054f-4729-9d5d-fce1e32594bf}</Project>
+      <Name>HtmlAgilityPack</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\libEraDeiFessi\libEraDeiFessi.csproj">
+      <Project>{c7da9b1a-b36b-4833-afc6-254d590108e2}</Project>
+      <Name>libEraDeiFessi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RealDebrid4DotNet\RealDebrid4DotNet.csproj">
+      <Project>{24c0ba97-8d12-4938-940b-f66a321dd2cd}</Project>
+      <Name>RealDebrid4DotNet</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_cross.png" />
+    <Resource Include="Resources\icon_go.png" />
+    <Resource Include="Resources\icon_play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_bookmark_off.png" />
+    <Resource Include="Resources\icon_bookmark_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_loading.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_all.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\app_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\gear_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_vlc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_shield.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_tick_simple.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

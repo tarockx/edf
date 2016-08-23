@@ -1,0 +1,445 @@
+﻿<Window x:Class="EraDeiFessi.MainWindow" x:Name="w1"
+        WindowStartupLocation="CenterScreen" Closing="w1_Closing"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:myControls="clr-namespace:EraDeiFessi.Controls"
+        xmlns:local="clr-namespace:EraDeiFessi"
+        xmlns:libEDF="clr-namespace:libEraDeiFessi;assembly=libEraDeiFessi"
+        xmlns:ni="http://www.hardcodet.net/taskbar"
+        xmlns:actb="http://wpfcontrols.com/"
+        xmlns:xwtk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Height="650" Width="1024" Loaded="Window_Loaded"
+        Title="{Binding Source={x:Static local:Constants.Title}}"
+        Icon="Resources\app_icon.ico" StateChanged="w1_StateChanged">
+    <Window.Resources>
+        <local:InverseBooleanConverter x:Key="booleanInverter"/>
+        <BooleanToVisibilityConverter x:Key="bool2vis"/>
+    </Window.Resources>
+
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo />
+    </Window.TaskbarItemInfo>
+    
+    <Grid x:Name="parentGrid">
+        <ni:TaskbarIcon IconSource="Resources\app_icon.ico" x:Name="notifyIcon" ToolTipText="EraDeiFessi è in esecuzione. Doppio clic per aprire." Visibility="Collapsed" TrayMouseDoubleClick="notifyIcon_TrayMouseDoubleClick"></ni:TaskbarIcon>
+
+        <Grid Margin="3" x:Name="mainGrid" AllowDrop="True" Drop="fileDropped" DragOver="mainGrid_DragOver">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.RowSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Panel.ZIndex="999" Background="#ddffffff" x:Name="gridUpdate" Visibility="Hidden">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2 -60 2 2" FontWeight="Bold" FontSize="18">Download dell'aggiornamento in corso...</TextBlock>
+                <ProgressBar HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25" Margin="40 2 40 2" x:Name="pbDownload" IsVisibleChanged="pbDownload_IsVisibleChanged"/>
+            </Grid>
+
+            <StackPanel Panel.ZIndex="5">
+                <StackPanel Margin="2">
+                    <Grid>
+                        <TextBlock HorizontalAlignment="Center" FontSize="12" TextAlignment="Center">
+                        <Bold FontSize="22">Era dei Fessi</Bold> <Bold FontSize="22" Foreground="MediumSlateBlue">5</Bold>
+                            
+                            (v.<TextBlock FontWeight="Bold" Text="{Binding Source={x:Static local:Constants.Version}}"/>)
+                        <LineBreak/>
+                        by <TextBlock FontWeight="Bold">Master_T</TextBlock>
+                        </TextBlock>
+
+                        <StackPanel Margin="2" HorizontalAlignment="Right">
+                            <GroupBox Header="Opzioni">
+                                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                    <Button Margin="2" Width="80" Click="btnOptions_Click">Opzioni</Button>
+                                    <Grid Width="80" x:Name="gridHistoryToggle">
+                                        <Button Margin="2" x:Name="btnToggleSharedHsitory" Click="btnToggleSharedHistory_Click" ToolTip="Clicca per passare dalla cronologia personale (locale) a quella condivisa (online)">
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="&#x1F553; "/>
+                                                <TextBlock x:Name="tbHistoryLocal" Foreground="Blue" Text="locale" FontWeight="Bold"/>
+                                                <TextBlock x:Name="tbHistoryShared" Foreground="Green" Text="online" FontWeight="Bold" Visibility="Collapsed"/>
+                                            </StackPanel>
+                                        </Button>
+                                        <myControls:LoadingPanel x:Name="lpHistoryToggle"  Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Grid>
+                                    <Button Margin="2" Width="80" Click="btnAbout_Click">About</Button>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+
+                    </Grid>
+                </StackPanel>
+
+            </StackPanel>
+
+            <TabControl Grid.Row="1" Margin="2" x:Name="tcMain">
+                <TabControl.Resources>
+                    <Style TargetType="TabPanel">
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                    </Style>
+                </TabControl.Resources>
+
+                <TabItem Width="120" Header="Contenuti" x:Name="tabContenuti">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Panel.ZIndex="10" VerticalAlignment="Center" x:Name="stackNoContentMessage">
+                            <TextBlock Margin="2" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">
+                            Nessun contenuto caricato. Vai alla sezione <Hyperlink Click="goToSearchSection_Click">Cerca</Hyperlink> o accedi ai <Hyperlink Click="goToBookmarksSection_Click">Preferiti</Hyperlink> per caricare un contenuto.
+                            </TextBlock>
+                        </StackPanel>
+
+                        <GroupBox Margin="2" Header="Contenuto selezionato" x:Name="groupLinksAndDeskContainer">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <myControls:LoadingPanel x:Name="lp1" Visibility="Hidden" Panel.ZIndex="9999"/>
+                                <myControls:LoadingPanel Grid.Column="1" x:Name="lp2" Visibility="Hidden" Panel.ZIndex="9999"/>
+
+                                <GroupBox Margin="2" Header="Episodi" x:Name="groupListaEpisodi">
+                                    <TreeView Margin="2" x:Name="treeEpisodes" SelectedItemChanged="treeEpisodes_SelectedItemChanged">
+                                        <TreeView.ItemContainerStyle>
+                                            <Style TargetType="TreeViewItem">
+                                                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                                                <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+                                            </Style>
+                                        </TreeView.ItemContainerStyle>
+
+                                        <TreeView.Resources>
+                                            <HierarchicalDataTemplate DataType="{x:Type libEDF:NestBlock}" ItemsSource="{Binding Children}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Margin="2" FontWeight="Bold" FontSize="14" Text="{Binding Title}" />
+                                                </StackPanel>
+                                            </HierarchicalDataTemplate>
+                                            <DataTemplate DataType="{x:Type libEDF:ContentNestBlock}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Title}" Margin="2" />
+                                                    <TextBlock Text=" &#x1F553;" Foreground="Red" Margin="2" Visibility="{Binding WasAccessed, Converter={StaticResource bool2vis}}">
+                                                        <TextBlock.ToolTip>
+                                                            <ToolTip>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock>
+                                                                        <TextBlock.Text>
+                                                                            <MultiBinding StringFormat="Aperto/Sbloccato l'ultima volta il {0:dd/MM/yyyy} alle {0:HH:mm}">
+                                                                                <Binding Path="LastAccess"/>
+                                                                            </MultiBinding>
+                                                                        </TextBlock.Text>
+                                                                    </TextBlock>
+                                                                </StackPanel>
+                                                            </ToolTip>
+                                                        </TextBlock.ToolTip>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </TreeView.Resources>
+                                    </TreeView>
+                                </GroupBox>
+
+                                <GroupBox Margin="2" Header="Link disponibili" x:Name="groupLinkFilm">
+                                    <WebBrowser x:Name="browserMovieLinks" Navigating="browserMovieLinks_Navigating"  Margin="2"/>
+                                </GroupBox>
+
+                                <GroupBox Margin="2" Header="Info" ClipToBounds="True" Grid.Column="1" x:Name="groupInfoPanel">
+                                    <Grid x:Name="descriptionGrid" Visibility="Hidden" ClipToBounds="True">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+
+                                        <Button BorderBrush="Transparent" Margin="2" HorizontalAlignment="Right" Width="30" Height="30" Background="Transparent" ToolTip="Aggiungi ai preferiti" x:Name="btnAddToBookmarks" Click="btnAddToBookmarks_Click">
+                                            <Image Source="Resources\icon_bookmark_off.png"/>
+                                        </Button>
+                                        <Button BorderBrush="Transparent" Margin="2" HorizontalAlignment="Right" Width="30" Height="30" Background="Transparent" ToolTip="Rimuovi dai preferiti" x:Name="btnDeleteBookmark" Click="btnDeleteBookmark_Click">
+                                            <Image Source="Resources\icon_bookmark_on.png"/>
+                                        </Button>
+
+                                        <TextBlock FontSize="16" HorizontalAlignment="Center" TextAlignment="Center" Margin="2" x:Name="tbShowInfo">
+                                            Stagioni: <TextBlock x:Name="lblSeasonCount" FontWeight="Bold" Text=""/> - Episodi: <TextBlock x:Name="lblEpisodeCount" FontWeight="Bold" Text=""/>
+                                        </TextBlock>
+
+                                        <TextBlock FontSize="16" HorizontalAlignment="Center" TextAlignment="Center" Margin="2 2 30 2" x:Name="tbMovieTitle" TextWrapping="Wrap">
+                                            Titolo: <TextBlock x:Name="lblMovieTitle" FontWeight="Bold" Text="" TextWrapping="Wrap"/>
+                                        </TextBlock>
+
+                                        <Image x:Name="imgCover" Margin="2" HorizontalAlignment="Center" Grid.Row="1"/>
+
+                                        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch">
+                                            <TextBlock Margin="2" x:Name="lblDescription" Grid.Row="2" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                                        </ScrollViewer>
+
+                                    </Grid>
+                                </GroupBox>
+                            </Grid>
+                        </GroupBox>
+
+                        <GroupBox Margin="2" Header="Torrent selezionato" x:Name="groupCurrentTorrent">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Margin="2" x:Name="tbTorrentTitle" FontSize="16" FontWeight="Bold" />
+                                <WebBrowser Margin="2" Grid.Row="1" x:Name="browserTorrentDescription" LoadCompleted="browserTorrentDescription_LoadCompleted" />
+                            </Grid>
+                        </GroupBox>
+
+                        <GroupBox Grid.Row="1" Margin="2" Header="Link e Download" Panel.ZIndex="5">
+                            <TabControl x:Name="tabLinks" Margin="2">
+                                <TabItem Header="Default" x:Name="tabItemDefaultMessage">
+                                    <Border BorderBrush="{x:Null}" Height="100">
+                                        <TextBlock Margin="2" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">
+                            Seleziona un episodio/link per procedere a download o streaming
+                                        </TextBlock>
+                                    </Border>
+
+                                </TabItem>
+                            </TabControl>
+                        </GroupBox>
+                    </Grid>
+
+
+                </TabItem>
+
+                <TabItem Width="120" Header="Cerca" x:Name="tabCerca">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="2 10 2 2">
+
+                            <actb:AutoCompleteTextBox x:Name="actb" Width="300" Margin="2"  KeyDown="actb_KeyDown" TextChanged="actb_TextChanged_2"/>
+
+                            <Button Margin="2" Width="70" x:Name="btnSearch" Click="btnSearch_Click" IsEnabled="False">Cerca</Button>
+                            <Button Margin="2" Width="70" x:Name="btnClearSearch" Click="btnClearSearch_Click" Visibility="Hidden" ToolTip="Pulisci ultima ricerca">
+                                Reset
+                            </Button>
+                        </StackPanel>
+
+                        <GroupBox Grid.Row="1" Margin="2" Header="Risultati di ricerca">
+                            <TabControl x:Name="tcSearch" Margin="2" TabStripPlacement="Left">
+                            </TabControl>
+                        </GroupBox>
+
+
+
+                        <GroupBox Margin="2" Grid.Column="1" Grid.Row="1">
+                            <GroupBox.Header>
+                                <CheckBox x:Name="chkSearchAll" Click="chkSearchAll_Click">Cerca tutti</CheckBox>
+                            </GroupBox.Header>
+
+                            <StackPanel Orientation="Vertical" Margin="2" DataContext="{Binding chkSearchAll}">
+                                <ItemsControl Margin="2" x:Name="icSearchPlugins">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <DockPanel  HorizontalAlignment="Stretch">
+                                                <Button VerticalContentAlignment="Center" ToolTip="Opzioni plugin" Width="18" Height="18" Loaded="btnPluginConfig_Loaded" Click="btnPluginConfig_Click" HorizontalAlignment="Right" DockPanel.Dock="Right"
+                                                            IsEnabled="{Binding Path=Children[1].IsChecked, RelativeSource={RelativeSource AncestorType=DockPanel}}">
+                                                    ...
+                                                </Button>
+                                                <CheckBox IsEnabled="{Binding RelativeSource={RelativeSource AncestorType=GroupBox}, Path=Header.IsChecked, Converter={StaticResource booleanInverter}}" Margin="2" Content="{Binding pluginName}" Click="chkSearchPlugin_Click" Name="chkSearchThis" Loaded="chkSearchThis_Loaded"/>
+                                            </DockPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </GroupBox>
+
+
+                    </Grid>
+                </TabItem>
+
+                <TabItem Width="120" Header="Liste Automatiche" x:Name="tabListe">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Margin="2" TextWrapping="Wrap" TextAlignment="Center">Da qui potete consultare le liste di contenuti fornite dai vari siti. Importante: l'affidabilità e completezza di queste liste dipende interamente dai gestori del sito
+                        e non da EraDeiFessi. Se un contenuto presente sul sito non compare nella lista provate a cercarlo direttamente con la funzione di ricerca.</TextBlock>
+                        <GroupBox Margin="2" Header="Liste" Grid.Row="1" x:Name="groupListe">
+
+                        </GroupBox>
+                    </Grid>
+
+                </TabItem>
+
+                <TabItem Width="120" Header="Preferiti" x:Name="tabPreferiti">
+                    <TabControl x:Name="tcPreferiti" Margin="5" TabStripPlacement="Left"/>
+                </TabItem>
+
+                <TabItem Width="120" Header="Link Unblocker" x:Name="tabUnblocker">
+                    <myControls:LinkUnblocker x:Name="myLinkUnblocker"/>
+                </TabItem>
+
+                <!--<TabItem Width="120" Header="Ricerca Sottotitoli" x:Name="tabSubtitles">
+                    <myControls:SubtitleSearch x:Name="mySubtitleSearch"/>
+                </TabItem>-->
+            </TabControl>
+        </Grid>
+
+        <!-- Opzioni -->
+        <GroupBox Header="Settings" Margin="2" Panel.ZIndex="99" VerticalAlignment="Stretch" x:Name="gbSettings" Grid.RowSpan="3" Visibility="Collapsed">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TabControl Margin="2">
+                        <TabItem Header="Aspetto">
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Text="Livello di zoom: " VerticalAlignment="Center" Margin="3"/>
+                                    <ComboBox x:Name="comboZoom" Margin="3" SelectionChanged="comboZoom_SelectionChanged" Grid.Column="1">
+                                        <ComboBoxItem Content="Normale" Tag="1"/>
+                                        <ComboBoxItem Content="Grande (1.25x)" Tag="1,25"/>
+                                        <ComboBoxItem Content="Più grande (1.5x)" Tag="1,50"/>
+                                        <ComboBoxItem Content="Massimo (2x)" Tag="2,00"/>
+                                    </ComboBox>
+
+                                    <TextBlock Text="Scheda iniziale: " VerticalAlignment="Center" Margin="3" Grid.Row="1"/>
+                                    <ComboBox x:Name="comboDefaultTab" Margin="3" Grid.Row="1" Grid.Column="1">
+                                        <ComboBoxItem Content="Contenuti" Tag="0"/>
+                                        <ComboBoxItem Content="Ricerca" Tag="1"/>
+                                        <ComboBoxItem Content="Liste Automatiche" Tag="2"/>
+                                        <ComboBoxItem Content="Preferiti" Tag="3"/>
+                                        <ComboBoxItem Content="Sblocca Link Diretto" Tag="4"/>
+                                        <ComboBoxItem Content="Ricerca Sottotitoli" Tag="5"/>
+                                    </ComboBox>
+                                </Grid>
+                                <CheckBox Margin="2" x:Name="chkMinimizeToTray" >Minimizza nel vassoio di sistema (utile se si usa l'estensione, rimane in ascolto senza mostrare la finestra)</CheckBox>
+                            </StackPanel>
+                        </TabItem>
+
+                        <TabItem Header="Funzionalità">
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <CheckBox Margin="2" x:Name="chkCheckForUpdates" >Controlla aggiornamenti all'avvio</CheckBox>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Margin="2" VerticalAlignment="Center" x:Name="chkEnableExtensionService" >Abilita il supporto all'estensione Chrome</CheckBox>
+                                    <Button Margin="2" VerticalAlignment="Center" Padding="2" Content="Installa l'estensione" IsEnabled="{Binding ElementName=chkEnableExtensionService, Path=IsChecked}" Click="btnInstallExtension_Click"></Button>
+                                </StackPanel>
+                                <GroupBox IsEnabled="{Binding ElementName=chkEnableExtensionService, Path=IsChecked}" Margin="15 2 2 2" Header="Quando l'estensione invia un link a EraDeiFessi:">
+                                    <StackPanel Orientation="Vertical">
+                                        <RadioButton Margin="2" Content="Sblocca solo il link e mostra l'interfaccia di EraDeiFessi" x:Name="rbOnLinkUnblock"/>
+                                        <RadioButton Margin="2" Content="Avvia il download immediatamente (IDM deve essere installato)" x:Name="rbOnLinkDownload"/>
+                                    </StackPanel>
+                                </GroupBox>
+                                <CheckBox Margin="2" x:Name="chkUseGoogleSuggestions">Usa i suggerimenti Google nella casella di ricerca</CheckBox>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Margin="2" x:Name="chkTrackHistory" VerticalAlignment="Center">Mantieni una cronologia dei link che hai sbloccato in passato</CheckBox>
+                                    <Button Margin="2" Content="Cancella cronologia locale" VerticalAlignment="Center" Click="btnClearHistory_Click" IsEnabled="{Binding ElementName=chkTrackHistory, Path=IsChecked}"/>
+                                </StackPanel>
+                                <GroupBox IsEnabled="{Binding ElementName=chkTrackHistory, Path=IsChecked}">
+                                    <GroupBox.Header>
+                                        <CheckBox Margin="2" x:Name="chkSupportSharedHistory">Abilita supporto alla cronologia condivisa.</CheckBox>
+                                    </GroupBox.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Username account EDF: " Margin="2" VerticalAlignment="Center"/>
+                                        <TextBox Margin="2 2 20 2" MinWidth="130" VerticalAlignment="Center" x:Name="txt_EDFuser" IsEnabled="{Binding ElementName=chkSupportSharedHistory, Path=IsChecked}"/>
+                                        <TextBlock Text="Password account EDF: " Margin="2" VerticalAlignment="Center"/>
+                                        <PasswordBox Margin="2" MinWidth="130" VerticalAlignment="Center" x:Name="txt_EDFpass" IsEnabled="{Binding ElementName=chkSupportSharedHistory, Path=IsChecked}" />
+                                    </StackPanel>
+                                </GroupBox>
+
+
+                            </StackPanel>
+                        </TabItem>
+
+                        <TabItem Header="Real-Debrid">
+                            <Grid VerticalAlignment="Top" Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Margin="3" Text="Stato:" Grid.Row="0" Grid.Column="0"/>
+                                <TextBlock Margin="3" x:Name="txtStatoRD" Grid.Row="0" Grid.Column="1" Text="Non connesso" TextWrapping="Wrap" FontWeight="Bold"/>
+                                <TextBlock Margin="3" Text="Token:" Grid.Row="1" Grid.Column="0"/>
+                                <TextBlock Margin="3" x:Name="txtTokenRD" Grid.Row="1" Grid.Column="1" Text="N/A" TextWrapping="Wrap" FontWeight="Bold"/>
+                                <TextBlock Margin="3" Text="Data scadenza token:" Grid.Row="2" Grid.Column="0"/>
+                                <TextBlock Margin="3" x:Name="txtScadenzaTokenRD" Grid.Row="2" Grid.Column="1" Text="N/A" TextWrapping="Wrap" FontWeight="Bold"/>
+                                <StackPanel Orientation="Horizontal" Margin="3" HorizontalAlignment="Center" Grid.Row="3" Grid.ColumnSpan="2">
+                                    <Button x:Name="btnAutorizzaAccount" Click="btnAutorizzaAccount_Click" Margin="3" Height="35" Width="150" Content="Effettua il Login"/>
+                                    <Button x:Name="btnDeautorizzaAccount" Click="btnDeautorizzaAccount_Click" Margin="3" Height="35" Width="150" Content="Log out"/>
+                                </StackPanel>
+                            </Grid>
+                        </TabItem>
+
+                        <TabItem Header="Torrent">
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Margin="2" Text="Scarica torrent in "/>
+                                    <TextBox Margin="2 2 20 2" x:Name="txtTorrentDownloadPath" Width="250" IsReadOnly="True"/>
+                                    <Button Margin="2" x:Name="btnEditTorrentDownloadPath" Content="Modifica" Click="btnEditTorrentDownloadPath_Click" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Margin="2" Text="Porta in ascolto (1024 - 65535) "/>
+                                    <xwtk:IntegerUpDown Margin="2" Minimum="1024" Maximum="65535" x:Name="txtPortNumber" Width="80" />
+                                </StackPanel>
+                            </StackPanel>
+                        </TabItem>
+
+                        <TabItem Header="Percorsi e manutenzione">
+                            <StackPanel Orientation="Vertical">
+                                <GroupBox Header="Reimposta percorsi"  Margin="10">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5">
+                                        <Button Margin="2" Height="35" Width="300" Content="Reimposta il percorso di PotPlayer" Click="btnSetPotplayerPath_Click"/>
+                                        <Button Margin="2" Height="35" Width="300" Content="Reimposta il percorso di VLC" Click="btnSetVLCPath_Click" />
+                                        <Button Margin="2" Height="35" Width="300" Content="Reimposta il percorso di InternetDownloadManager" Click="btnSetIDMPath_Click" />
+                                    </StackPanel>
+                                </GroupBox>
+
+                                <GroupBox Header="Reset e disinstallazione" Margin="10">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" VerticalAlignment="Top">
+                                    <Button Margin="2" Height="35" Width="300" Content="Ripristina impostazioni iniziali" Click="btnClean_Click"/>
+                                    <Button Margin="2" Height="35" Width="300" Click="btnUninstall_Click">
+                                        <DockPanel>
+                                            <Image Source="Resources\icon_shield.png" Height="22" DockPanel.Dock="Left" VerticalAlignment="Center"/>
+                                            <TextBlock VerticalAlignment="Center" Foreground="Red" FontWeight="Bold">Disinstalla EraDeiFessi</TextBlock>
+                                        </DockPanel>
+                                    </Button>
+                                </StackPanel>
+                                </GroupBox>
+                                
+                            </StackPanel>
+
+                        </TabItem>
+                    </TabControl>
+
+                    <Button Content="Applica" Margin="3" FontWeight="Bold" FontSize="14" MinHeight="40" Width="200" Click="saveSettings_Click" Grid.Row="1"/>
+                </Grid>
+            </ScrollViewer>
+        </GroupBox>
+    </Grid>
+</Window>

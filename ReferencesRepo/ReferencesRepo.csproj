@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9B599B53-7921-43C6-B0D4-532ED959B0E1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ReferencesRepo</RootNamespace>
+    <AssemblyName>ReferencesRepo</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PCL\Newtonsoft.Json.dll" />
+    <Content Include="ragnar\boost_chrono-vc120-mt-1_55.dll" />
+    <Content Include="ragnar\boost_date_time-vc120-mt-1_55.dll" />
+    <Content Include="ragnar\boost_system-vc120-mt-1_55.dll" />
+    <Content Include="ragnar\boost_thread-vc120-mt-1_55.dll" />
+    <Content Include="ragnar\Ragnar.dll" />
+    <Content Include="ragnar\torrent.dll" />
+    <Content Include="wpf\WpfControls.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(ProjectDir)ragnar\WpfControls.dll" "$(SolutionDir)EraDeiFessi\bin\Release\WpfControls.dll"
+copy /Y "$(ProjectDir)ragnar\WpfControls.dll" "$(SolutionDir)EraDeiFessi\bin\Debug\WpfControls.dll"
+copy /Y "$(ProjectDir)ragnar\torrent.dll" "$(SolutionDir)EraDeiFessi\bin\Release\torrent.dll"
+copy /Y "$(ProjectDir)ragnar\torrent.dll" "$(SolutionDir)EraDeiFessi\bin\Debug\torrent.dll"
+copy /Y "$(ProjectDir)ragnar\boost_chrono-vc120-mt-1_55.dll" "$(SolutionDir)EraDeiFessi\bin\Release\boost_chrono-vc120-mt-1_55.dll"
+copy /Y "$(ProjectDir)ragnar\boost_chrono-vc120-mt-1_55.dll" "$(SolutionDir)EraDeiFessi\bin\Debug\boost_chrono-vc120-mt-1_55.dll"
+copy /Y "$(ProjectDir)ragnar\boost_date_time-vc120-mt-1_55.dll" "$(SolutionDir)EraDeiFessi\bin\Release\boost_date_time-vc120-mt-1_55.dll"
+copy /Y "$(ProjectDir)ragnar\boost_date_time-vc120-mt-1_55.dll" "$(SolutionDir)EraDeiFessi\bin\Debug\boost_date_time-vc120-mt-1_55.dll"
+copy /Y "$(ProjectDir)ragnar\boost_system-vc120-mt-1_55.dll" "$(SolutionDir)EraDeiFessi\bin\Release\boost_system-vc120-mt-1_55.dll"
+copy /Y "$(ProjectDir)ragnar\boost_system-vc120-mt-1_55.dll" "$(SolutionDir)EraDeiFessi\bin\Debug\boost_system-vc120-mt-1_55.dll"
+copy /Y "$(ProjectDir)ragnar\boost_thread-vc120-mt-1_55.dll" "$(SolutionDir)EraDeiFessi\bin\Release\boost_thread-vc120-mt-1_55.dll"
+copy /Y "$(ProjectDir)ragnar\boost_thread-vc120-mt-1_55.dll" "$(SolutionDir)EraDeiFessi\bin\Debug\boost_thread-vc120-mt-1_55.dll"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

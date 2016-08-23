@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/txtSearch"
+            android:layout_weight="1"
+            android:hint="Cosa stai cercando?"
+            android:inputType="text"
+            android:imeOptions="actionSearch"
+            android:imeActionLabel="Cerca"
+            android:imeActionId="999" />
+        <Button
+            android:text="Cerca"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/btnSearch" />
+    </LinearLayout>
+    <ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listViewSearchSuggestions" />
+</LinearLayout>

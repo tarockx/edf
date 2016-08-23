@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReleaseInfoCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<release>
+		<Version>1.2.2.0</Version>
+		<Notes>
+			Riscritta la libreria di interazione con Real-Debrid per adeguarsi alle nuove API
+		</Notes>
+	</release>
+	<release>
+		<Version>1.2.1.2</Version>
+		<Notes>
+			Fix plugin AllUC, i risultati pubblicitari sono ora filtrati dalla ricerca
+			Pressione prolungata su un suggerimento per copiarlo nella casella di ricerca
+			Fix minori all'interfaccia utente
+		</Notes>
+	</release>
+	<release>
+		<Version>1.2.1.1</Version>
+		<Notes>
+			Aggiunto supporto per Cineblog01 e PirateStreaming Film
+			Implementate notifiche automatiche della presenza di nuove versioni
+		</Notes>
+	</release>
+	<release>
+		<Version>1.2.1.0</Version>
+		<Notes>
+			Prima versione pubblica di iEDF
+		</Notes>
+	</release>
+</ReleaseInfoCollection>

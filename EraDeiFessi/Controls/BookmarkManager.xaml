@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="EraDeiFessi.Controls.BookmarkManager" x:Name="bm1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:myControls="clr-namespace:EraDeiFessi.Controls"
+             xmlns:helpers="clr-namespace:EraDeiFessi.Helpers"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="bool2vis"/>
+        <helpers:InvertedBooleanToVisibilityConverter x:Key="bool2vis_inv" />
+    </UserControl.Resources>
+    
+    <Grid>
+        <myControls:LoadingPanel Panel.ZIndex="999" Visibility="Hidden" x:Name="panel1"/>
+        <TextBlock FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="9999" x:Name="txtMessage" TextWrapping="Wrap" Margin="10"/>
+        
+        <GroupBox Header="Preferiti" Margin="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <ListView Margin="2" ItemsSource="{Binding ElementName=bm1, Path=Bookmarks}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Orientation="Vertical" Margin="2" ToolTip="{Binding Name}" MouseDown="StackPanel_MouseDown">
+                                    <TextBlock Margin="2" FontWeight="Bold" FontSize="12" Text="{Binding Name}"/>
+                                    <TextBlock Margin="2" FontWeight="Normal" Foreground="Gray" FontSize="11" Text="{Binding Subtitle}" Visibility="{Binding HasMetadata, Converter={StaticResource bool2vis_inv}}"/>
+                                    <StackPanel Margin="2" Orientation="Horizontal" Visibility="{Binding HasMetadata, Converter={StaticResource bool2vis}}">
+                                        <TextBlock Foreground="Gray" FontSize="11" Text="Ext: "/>
+                                        <TextBlock FontSize="11" Text="{Binding Metadata.Extension}">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Metadata.IsVideo}" Value="true">
+                                                            <Setter Property="Foreground" Value="Blue"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Metadata.IsVideo}" Value="false">
+                                                            <Setter Property="Foreground" Value="Firebrick"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                        <TextBlock Foreground="Gray" FontSize="11" Text=" - "/>
+
+                                        <TextBlock Foreground="Gray" FontSize="11" Text="Hoster: "/>
+                                        <TextBlock FontSize="11" Text="{Binding Metadata.Host}" Foreground="#009933"></TextBlock>
+                                        <TextBlock Foreground="Gray" FontSize="11" Text=" - "/>
+
+                                        <TextBlock Foreground="Gray" FontSize="11" Text="Size: "/>
+                                        <TextBlock FontSize="11" Text="{Binding Metadata.Size}"></TextBlock>
+                                        <TextBlock Foreground="Gray" FontSize="11" Text=" - "/>
+
+                                        <TextBlock Foreground="Gray" FontSize="11" Text="Date: "/>
+                                        <TextBlock FontSize="11" Text="{Binding Metadata.Date}"></TextBlock>
+                                        <TextBlock Foreground="Gray" FontSize="11" Text=" - "/>
+
+                                        <TextBlock Foreground="Gray" FontSize="11" Text="Parts: "/>
+                                        <TextBlock FontSize="11" Text="{Binding Metadata.Parts}"></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="2" HorizontalAlignment="Right" Grid.Column="1">
+                                    <Button Margin="2" Width="90" Height="30" x:Name="btnGo" Click="btnGo_Click" HorizontalAlignment="Right">
+                                        <StackPanel Orientation="Horizontal">
+                                            <myControls:AutoGreyableImage Source="..\Resources\icon_go.png" Margin="2"/>
+                                            <TextBlock Margin="2" VerticalAlignment="Center">Apri</TextBlock>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button Margin="2" Width="90" Height="30" x:Name="btnDelete" Click="btnDelete_Click" HorizontalAlignment="Right" Visibility="{Binding BookmarkMode, Converter={StaticResource bool2vis}, Source={x:Reference bm1}}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <myControls:AutoGreyableImage Source="..\Resources\icon_cross.png" Margin="2"/>
+                                            <TextBlock Margin="2" VerticalAlignment="Center">Cancella</TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                
+                <Button Margin="2" HorizontalAlignment="Center" Height="25" Grid.Row="1" Visibility="Collapsed" x:Name="btnLoadNextPage" Click="btnLoadNextPage_Click">Carica ulteriori risultati...</Button>
+                <myControls:LoadingPanel Margin="2" x:Name="lp2" Grid.Row="1" Height="25" Visibility="Collapsed"/>
+            </Grid>
+            
+        </GroupBox>
+        
+    </Grid>
+</UserControl>

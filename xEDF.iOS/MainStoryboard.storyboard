@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="16">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+    </dependencies>
+    <scenes>
+        <scene sceneID="4">
+            <objects>
+                <viewController id="5" sceneMemberID="viewController" customClass="ViewController_SearchEngine" title="Ricerca">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2"/>
+                        <viewControllerLayoutGuide type="bottom" id="3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="223" translatesAutoresizingMaskIntoConstraints="NO" placeholder="Cosa stai cercando?" clearButtonMode="always">
+                                <rect key="frame" x="5" y="69" width="235" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="webSearch"/>
+                                <connections>
+                                    <action selector="txtSearch_ValueChanged:" destination="5" id="280" eventType="editingChanged"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="231" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="245" y="69" width="70" height="30"/>
+                                <state key="normal" title="Cerca">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BtnSearch_TouchUpInside:" destination="5" id="287" eventType="touchUpInside"/>
+                                </connections>
+                                <constraints>
+                                    <constraint id="352" firstItem="231" firstAttribute="width" constant="70"/>
+                                </constraints>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" id="236" translatesAutoresizingMaskIntoConstraints="NO" keyboardDismissMode="onDrag">
+                                <rect key="frame" x="0.0" y="104" width="320" height="388"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes/>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint id="337" firstItem="223" firstAttribute="top" secondItem="2" secondAttribute="bottom" constant="5"/>
+                            <constraint id="338" firstItem="223" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="5"/>
+                            <constraint id="340" firstItem="231" firstAttribute="top" secondItem="2" secondAttribute="bottom" constant="5"/>
+                            <constraint id="344" firstItem="236" firstAttribute="top" secondItem="223" secondAttribute="bottom" constant="5"/>
+                            <constraint id="348" firstItem="236" firstAttribute="leading" secondItem="6" secondAttribute="leading"/>
+                            <constraint id="349" firstItem="6" firstAttribute="trailing" secondItem="236" secondAttribute="trailing"/>
+                            <constraint id="351" firstItem="6" firstAttribute="trailing" secondItem="231" secondAttribute="trailing" constant="5"/>
+                            <constraint id="354" firstItem="231" firstAttribute="leading" secondItem="223" secondAttribute="trailing" constant="5"/>
+                            <constraint id="361" firstItem="231" firstAttribute="height" secondItem="223" secondAttribute="height"/>
+                            <constraint id="1041" firstItem="3" firstAttribute="top" secondItem="236" secondAttribute="bottom"/>
+                        </constraints>
+                        <connections/>
+                    </view>
+                    <navigationItem title="iEDF - Ricerca" id="165" key="navigationItem"/>
+                    <connections>
+                        <outlet property="tableSearchSuggestions" destination="236" id="name-outlet-236"/>
+                        <outlet property="txtSearch" destination="223" id="name-outlet-223"/>
+                        <outlet property="btnSearch" destination="231" id="name-outlet-231"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-471" y="150"/>
+        </scene>
+        <scene sceneID="15">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="16" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="19">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                    </navigationBar>
+                    <connections>
+                        <segue id="166" destination="5" kind="relationship" relationship="rootViewController"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="20" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-922" y="169"/>
+        </scene>
+        <scene sceneID="303">
+            <objects>
+                <viewController id="304" sceneMemberID="viewController" customClass="ViewController_SearchResults" storyboardIdentifier="SearchResultsController" title="Risultati">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="301"/>
+                        <viewControllerLayoutGuide type="bottom" id="302"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="305">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" id="312" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="435" rowHeight="44">
+                                        <rect key="frame" x="0.0" y="1" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="435" id="436">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint id="320" firstItem="305" firstAttribute="trailing" secondItem="312" secondAttribute="trailing"/>
+                            <constraint id="321" firstItem="312" firstAttribute="leading" secondItem="305" secondAttribute="leading"/>
+                            <constraint id="322" firstItem="302" firstAttribute="top" secondItem="312" secondAttribute="bottom"/>
+                            <constraint id="373" firstItem="312" firstAttribute="top" secondItem="305" secondAttribute="top"/>
+                        </constraints>
+                        <connections/>
+                    </view>
+                    <connections>
+                        <outlet property="tableResults" destination="312" id="name-outlet-312"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="306" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-102" y="153"/>
+        </scene>
+        <scene sceneID="593">
+            <objects>
+                <viewController id="594" sceneMemberID="viewController" customClass="ViewController_Bookmarks" storyboardIdentifier="BookmarksController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="591"/>
+                        <viewControllerLayoutGuide type="bottom" id="592"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="595">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="598" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="5" y="533" width="310" height="30"/>
+                                <state key="normal" title="Carica altri risultati">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <constraints>
+                                    <constraint id="613" firstItem="598" firstAttribute="height" constant="30"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="btnSearch_TouchUpInside:" destination="594" id="629" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="602" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="0.0" y="25" width="320" height="503"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes/>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint id="599" firstItem="595" firstAttribute="trailing" secondItem="598" secondAttribute="trailing" constant="5"/>
+                            <constraint id="600" firstItem="598" firstAttribute="leading" secondItem="595" secondAttribute="leading" constant="5"/>
+                            <constraint id="601" firstItem="592" firstAttribute="top" secondItem="598" secondAttribute="bottom" constant="5"/>
+                            <constraint id="614" firstItem="595" firstAttribute="trailing" secondItem="602" secondAttribute="trailing"/>
+                            <constraint id="618" firstItem="602" firstAttribute="leading" secondItem="595" secondAttribute="leading"/>
+                            <constraint id="619" firstItem="598" firstAttribute="top" secondItem="602" secondAttribute="bottom" constant="5"/>
+                            <constraint id="638" firstItem="602" firstAttribute="top" secondItem="591" secondAttribute="bottom" constant="5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableBookmarks" destination="602" id="name-outlet-602"/>
+                        <outlet property="btnLoadMore" destination="598" id="name-outlet-598"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="596" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="269" y="148"/>
+        </scene>
+        <scene sceneID="620">
+            <objects>
+                <tableViewController id="621" sceneMemberID="viewController" customClass="ViewController_NestBlocks" storyboardIdentifier="NestBlocksController" title="NestBlocks">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="622">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="625" rowHeight="44">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="625" id="626">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="621" id="623"/>
+                            <outlet property="delegate" destination="621" id="624"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="627" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="637" y="-193"/>
+        </scene>
+        <scene sceneID="657">
+            <objects>
+                <tableViewController id="658" sceneMemberID="viewController" customClass="ViewController_ContentNestBlock" storyboardIdentifier="ContentNestBlockController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="659">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="662" rowHeight="44">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="662" id="663">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="658" id="660"/>
+                            <outlet property="delegate" destination="658" id="661"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="664" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="977" y="-194"/>
+        </scene>
+        <scene sceneID="689">
+            <objects>
+                <tableViewController id="690" sceneMemberID="viewController" customClass="ViewController_Links" storyboardIdentifier="LinksController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="691">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="694" rowHeight="44">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="694" id="695">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="690" id="692"/>
+                            <outlet property="delegate" destination="690" id="693"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="696" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1330" y="-193"/>
+        </scene>
+        <scene sceneID="700">
+            <objects>
+                <viewController id="701" sceneMemberID="viewController" storyboardIdentifier="LinkManagerController" customClass="ViewController_LinkManager">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="698"/>
+                        <viewControllerLayoutGuide type="bottom" id="699"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="702">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="713" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="5" y="121.5" width="145" height="32"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                <state key="normal" title="Copia">
+                                    <color key="titleColor" colorSpace="calibratedRGB" red="0" green="0.47843137254901963" blue="1" alpha="1"/>
+                                </state>
+                            </button>
+                            <label contentMode="left" text="this is the ttitle " lineBreakMode="wordWrap" id="714" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" userInteractionEnabled="NO" opaque="NO" numberOfLines="0" minimumFontSize="10" clipsSubviews="YES">
+                                <rect key="frame" x="5" y="25" width="310" height="20.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Link originale:" lineBreakMode="tailTruncation" minimumFontSize="10" id="722" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="10" y="60.5" width="305" height="20.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="questo è l'URL" lineBreakMode="middleTruncation" minimumFontSize="10" id="726" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
+                                <rect key="frame" x="15" y="91" width="290" height="20.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" colorSpace="calibratedWhite" white="0.333333333333333" alpha="1"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="733" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="170" y="121.5" width="145" height="32"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                <state key="normal" title="Apri">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Real-Debrid:" lineBreakMode="tailTruncation" minimumFontSize="10" id="739" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="10" y="188.5" width="300" height="20.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="743" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" text="il link è supportato!">
+                                <rect key="frame" x="15" y="219" width="290" height="20.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" colorSpace="calibratedRGB" red="0" green="0.50196078431372548" blue="0" alpha="1"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="il link non è supportato" lineBreakMode="tailTruncation" minimumFontSize="10" id="747" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
+                                <rect key="frame" x="15" y="219" width="290" height="20.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" colorSpace="calibratedRGB" red="1" green="0" blue="0" alpha="1"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="751" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="20" y="249.5" width="280" height="30"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                <state key="normal" title="Sblocca con Real-Debrid">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <view contentMode="scaleToFill" id="755" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                                <rect key="frame" x="0.0" y="299.5" width="320" height="269.5"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="ERRORE:" lineBreakMode="tailTruncation" minimumFontSize="10" id="756" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
+                                        <rect key="frame" x="15" y="0.0" width="290" height="20.5"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" colorSpace="calibratedRGB" red="1" green="0" blue="0" alpha="1"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="messaggio di errore" lineBreakMode="wordWrap" minimumFontSize="10" id="764" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" numberOfLines="0">
+                                        <rect key="frame" x="15" y="25.5" width="290" height="20.5"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint id="757" firstItem="756" firstAttribute="leading" secondItem="755" secondAttribute="leading" constant="15"/>
+                                    <constraint id="758" firstItem="756" firstAttribute="top" secondItem="755" secondAttribute="top"/>
+                                    <constraint id="759" firstItem="755" firstAttribute="trailing" secondItem="756" secondAttribute="trailing" constant="15"/>
+                                    <constraint id="765" firstItem="764" firstAttribute="top" secondItem="756" secondAttribute="bottom" constant="5"/>
+                                    <constraint id="766" firstItem="764" firstAttribute="leading" secondItem="755" secondAttribute="leading" constant="15"/>
+                                    <constraint id="767" firstItem="755" firstAttribute="trailing" secondItem="764" secondAttribute="trailing" constant="15"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" id="775" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                                <rect key="frame" x="0.0" y="299.5" width="320" height="270.5"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Link sbloccato!" lineBreakMode="tailTruncation" minimumFontSize="10" id="780" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
+                                        <rect key="frame" x="15" y="5" width="290" height="20.5"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" colorSpace="calibratedRGB" red="0" green="0.50196078431372548" blue="0" alpha="1"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="info sul link" lineBreakMode="wordWrap" minimumFontSize="10" id="788" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" numberOfLines="0">
+                                        <rect key="frame" x="15" y="35.5" width="290" height="20.5"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="793" translatesAutoresizingMaskIntoConstraints="NO">
+                                        <rect key="frame" x="10" y="66" width="140" height="30"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                        <state key="normal" title="Copia">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="796" translatesAutoresizingMaskIntoConstraints="NO">
+                                        <rect key="frame" x="170" y="66" width="140" height="30"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                        <state key="normal" title="Apri">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint id="781" firstItem="780" firstAttribute="top" secondItem="775" secondAttribute="top" constant="5"/>
+                                    <constraint id="782" firstItem="780" firstAttribute="leading" secondItem="775" secondAttribute="leading" constant="15"/>
+                                    <constraint id="783" firstItem="775" firstAttribute="trailing" secondItem="780" secondAttribute="trailing" constant="15"/>
+                                    <constraint id="789" firstItem="788" firstAttribute="leading" secondItem="775" secondAttribute="leading" constant="15"/>
+                                    <constraint id="791" firstItem="775" firstAttribute="trailing" secondItem="788" secondAttribute="trailing" constant="15"/>
+                                    <constraint id="792" firstItem="788" firstAttribute="top" secondItem="780" secondAttribute="bottom" constant="10"/>
+                                    <constraint id="794" firstItem="793" firstAttribute="leading" secondItem="775" secondAttribute="leading" constant="10"/>
+                                    <constraint id="795" firstItem="793" firstAttribute="top" secondItem="788" secondAttribute="bottom" constant="10"/>
+                                    <constraint id="797" firstItem="796" firstAttribute="leading" secondItem="793" secondAttribute="trailing" constant="20"/>
+                                    <constraint id="798" firstItem="775" firstAttribute="trailing" secondItem="796" secondAttribute="trailing" constant="10"/>
+                                    <constraint id="799" firstItem="793" firstAttribute="width" secondItem="796" secondAttribute="width"/>
+                                    <constraint id="800" firstItem="793" firstAttribute="height" secondItem="796" secondAttribute="height"/>
+                                    <constraint id="801" firstItem="796" firstAttribute="top" secondItem="788" secondAttribute="bottom" constant="10"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Non sei loggato a Real-Debrid" lineBreakMode="wordWrap" minimumFontSize="10" id="809" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="0" textAlignment="center">
+                                <rect key="frame" x="15" y="219" width="290" height="20.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" id="823" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="0.0" y="301.5" width="320" height="266.5"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Motivo per cui non sei collegato" lineBreakMode="wordWrap" minimumFontSize="10" id="828" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" numberOfLines="0">
+                                        <rect key="frame" x="5" y="5" width="310" height="20.5"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="858" translatesAutoresizingMaskIntoConstraints="NO">
+                                        <rect key="frame" x="110" y="45.5" width="100" height="30"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                        <state key="normal" title="Connettiti">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <constraints>
+                                            <constraint id="861" firstItem="858" firstAttribute="width" constant="100"/>
+                                        </constraints>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint id="829" firstItem="828" firstAttribute="leading" secondItem="823" secondAttribute="leading" constant="5"/>
+                                    <constraint id="830" firstItem="828" firstAttribute="top" secondItem="823" secondAttribute="top" constant="5"/>
+                                    <constraint id="831" firstItem="823" firstAttribute="trailing" secondItem="828" secondAttribute="trailing" constant="5"/>
+                                    <constraint id="904" firstItem="858" firstAttribute="top" secondItem="828" secondAttribute="bottom" constant="20"/>
+                                    <constraint id="905" firstItem="858" firstAttribute="centerX" secondItem="823" secondAttribute="centerX"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint id="715" firstItem="714" firstAttribute="leading" secondItem="702" secondAttribute="leading" constant="5"/>
+                            <constraint id="716" firstItem="702" firstAttribute="trailing" secondItem="714" secondAttribute="trailing" constant="5"/>
+                            <constraint id="717" firstItem="714" firstAttribute="top" secondItem="698" secondAttribute="bottom" constant="5"/>
+                            <constraint id="723" firstItem="722" firstAttribute="top" secondItem="714" secondAttribute="bottom" constant="15"/>
+                            <constraint id="724" firstItem="722" firstAttribute="leading" secondItem="702" secondAttribute="leading" constant="10"/>
+                            <constraint id="725" firstItem="702" firstAttribute="trailing" secondItem="722" secondAttribute="trailing" constant="5"/>
+                            <constraint id="727" firstItem="726" firstAttribute="top" secondItem="722" secondAttribute="bottom" constant="10"/>
+                            <constraint id="728" firstItem="726" firstAttribute="leading" secondItem="702" secondAttribute="leading" constant="15"/>
+                            <constraint id="729" firstItem="702" firstAttribute="trailing" secondItem="726" secondAttribute="trailing" constant="15"/>
+                            <constraint id="730" firstItem="713" firstAttribute="top" secondItem="726" secondAttribute="bottom" constant="10"/>
+                            <constraint id="731" firstItem="713" firstAttribute="leading" secondItem="702" secondAttribute="leading" constant="5"/>
+                            <constraint id="734" firstItem="733" firstAttribute="leading" secondItem="713" secondAttribute="trailing" constant="20"/>
+                            <constraint id="735" firstItem="702" firstAttribute="trailing" secondItem="733" secondAttribute="trailing" constant="5"/>
+                            <constraint id="736" firstItem="733" firstAttribute="top" secondItem="726" secondAttribute="bottom" constant="10"/>
+                            <constraint id="737" firstItem="713" firstAttribute="width" secondItem="733" secondAttribute="width"/>
+                            <constraint id="738" firstItem="713" firstAttribute="height" secondItem="733" secondAttribute="height"/>
+                            <constraint id="740" firstItem="739" firstAttribute="leading" secondItem="702" secondAttribute="leading" constant="10"/>
+                            <constraint id="741" firstItem="739" firstAttribute="top" secondItem="713" secondAttribute="bottom" constant="35"/>
+                            <constraint id="742" firstItem="702" firstAttribute="trailing" secondItem="739" secondAttribute="trailing" constant="10"/>
+                            <constraint id="744" firstItem="743" firstAttribute="top" secondItem="739" secondAttribute="bottom" constant="10"/>
+                            <constraint id="745" firstItem="743" firstAttribute="leading" secondItem="702" secondAttribute="leading" constant="15"/>
+                            <constraint id="746" firstItem="702" firstAttribute="trailing" secondItem="743" secondAttribute="trailing" constant="15"/>
+                            <constraint id="748" firstItem="747" firstAttribute="top" secondItem="739" secondAttribute="bottom" constant="10"/>
+                            <constraint id="749" firstItem="747" firstAttribute="leading" secondItem="702" secondAttribute="leading" constant="15"/>
+                            <constraint id="750" firstItem="702" firstAttribute="trailing" secondItem="747" secondAttribute="trailing" constant="15"/>
+                            <constraint id="752" firstItem="751" firstAttribute="leading" secondItem="702" secondAttribute="leading" constant="20"/>
+                            <constraint id="753" firstItem="751" firstAttribute="top" secondItem="747" secondAttribute="bottom" constant="10"/>
+                            <constraint id="754" firstItem="702" firstAttribute="trailing" secondItem="751" secondAttribute="trailing" constant="20"/>
+                            <constraint id="760" firstItem="755" firstAttribute="top" secondItem="751" secondAttribute="bottom" constant="20"/>
+                            <constraint id="761" firstItem="702" firstAttribute="trailing" secondItem="755" secondAttribute="trailing"/>
+                            <constraint id="762" firstItem="755" firstAttribute="leading" secondItem="702" secondAttribute="leading"/>
+                            <constraint id="763" firstItem="755" firstAttribute="bottom" secondItem="699" secondAttribute="top" constant="1"/>
+                            <constraint id="776" firstItem="775" firstAttribute="top" secondItem="751" secondAttribute="bottom" constant="20"/>
+                            <constraint id="777" firstItem="775" firstAttribute="leading" secondItem="702" secondAttribute="leading"/>
+                            <constraint id="778" firstItem="702" firstAttribute="trailing" secondItem="775" secondAttribute="trailing"/>
+                            <constraint id="779" firstItem="775" firstAttribute="bottom" secondItem="699" secondAttribute="top" constant="2"/>
+                            <constraint id="810" firstItem="809" firstAttribute="top" secondItem="739" secondAttribute="bottom" constant="10"/>
+                            <constraint id="811" firstItem="809" firstAttribute="leading" secondItem="702" secondAttribute="leading" constant="15"/>
+                            <constraint id="812" firstItem="702" firstAttribute="trailing" secondItem="809" secondAttribute="trailing" constant="15"/>
+                            <constraint id="824" firstItem="823" firstAttribute="top" secondItem="751" secondAttribute="bottom" constant="20"/>
+                            <constraint id="825" firstItem="702" firstAttribute="trailing" secondItem="823" secondAttribute="trailing"/>
+                            <constraint id="826" firstItem="823" firstAttribute="leading" secondItem="702" secondAttribute="leading"/>
+                            <constraint id="827" firstItem="699" firstAttribute="top" secondItem="823" secondAttribute="bottom"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="labelTitle" destination="714" id="name-outlet-714"/>
+                        <outlet property="labelUrl" destination="726" id="name-outlet-726"/>
+                        <outlet property="btnCopyOriginal" destination="713" id="name-outlet-713"/>
+                        <outlet property="btnOpenOriginal" destination="733" id="name-outlet-733"/>
+                        <outlet property="labelLinkSupported" destination="743" id="name-outlet-743"/>
+                        <outlet property="labelLinkUnsupported" destination="747" id="name-outlet-747"/>
+                        <outlet property="btnUnblock" destination="751" id="name-outlet-751"/>
+                        <outlet property="labelError" destination="764" id="name-outlet-764"/>
+                        <outlet property="viewErrorMessage" destination="755" id="name-outlet-755"/>
+                        <outlet property="viewUnblockedLink" destination="775" id="name-outlet-775"/>
+                        <outlet property="btnCopyUnblocked" destination="793" id="name-outlet-793"/>
+                        <outlet property="btnOpenUnblocked" destination="796" id="name-outlet-796"/>
+                        <outlet property="labelNotLoggedIn" destination="809" id="name-outlet-809"/>
+                        <outlet property="labelUnblockedFileInfo" destination="788" id="name-outlet-788"/>
+                        <outlet property="viewRDLogin" destination="823" id="name-outlet-823"/>
+                        <outlet property="btnLoginToRD" destination="858" id="name-outlet-858"/>
+                        <outlet property="labelReasonWhyNotLoggedIn" destination="828" id="name-outlet-828"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="703" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1674" y="174"/>
+        </scene>
+        <scene sceneID="944">
+            <objects>
+                <viewController id="945" sceneMemberID="viewController" customClass="ViewController_Options" storyboardIdentifier="OptionsController" title="Opzioni di ricerca">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="942"/>
+                        <viewControllerLayoutGuide type="bottom" id="943"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="946">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="951" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes/>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint id="959" firstItem="946" firstAttribute="trailing" secondItem="951" secondAttribute="trailing"/>
+                            <constraint id="960" firstItem="951" firstAttribute="leading" secondItem="946" secondAttribute="leading"/>
+                            <constraint id="961" firstItem="943" firstAttribute="top" secondItem="951" secondAttribute="bottom"/>
+                            <constraint id="973" firstItem="951" firstAttribute="top" secondItem="946" secondAttribute="top"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableOptions" destination="951" id="name-outlet-951"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="947" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-465" y="-506"/>
+        </scene>
+        <scene sceneID="1001">
+            <objects>
+                <viewController id="1002" sceneMemberID="viewController" customClass="ViewController_HtmlContent" storyboardIdentifier="HtmlContentController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="999"/>
+                        <viewControllerLayoutGuide type="bottom" id="1000"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1003">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="1006" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <constraints>
+                            <constraint id="1008" firstItem="1006" firstAttribute="leading" secondItem="1003" secondAttribute="leading"/>
+                            <constraint id="1009" firstItem="1003" firstAttribute="trailing" secondItem="1006" secondAttribute="trailing"/>
+                            <constraint id="1012" firstItem="1000" firstAttribute="top" secondItem="1006" secondAttribute="bottom"/>
+                            <constraint id="1054" firstItem="1006" firstAttribute="top" secondItem="1003" secondAttribute="top"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="1006" id="name-outlet-1006"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1004" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="656" y="455"/>
+        </scene>
+        <scene sceneID="1069">
+            <objects>
+                <viewController id="1070" sceneMemberID="viewController" customClass="ViewController_RDAuthenticator" storyboardIdentifier="RDAuthenticatorController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1067"/>
+                        <viewControllerLayoutGuide type="bottom" id="1068"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1071">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="1093" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="0.0" y="185" width="320" height="378"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="E' necessario autorizzare il tuo account su iEDF. Il tuo codice di autorizzazione è mostrato qui sotto:" lineBreakMode="wordWrap" minimumFontSize="10" id="1166" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="0">
+                                <rect key="frame" x="5" y="25" width="310" height="53"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1250">
+                                <rect key="frame" x="45" y="83.5" width="210.5" height="20"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1252" fixedFrame="YES">
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sto ottenendo il codice..." lineBreakMode="tailTruncation" minimumFontSize="10" id="1251" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                        <rect key="frame" x="20" y="0.0" width="190.5" height="20"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint id="1255" firstItem="1250" firstAttribute="height" constant="20"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1256" spacing="10">
+                                <rect key="frame" x="83" y="83.5" width="154.5" height="41"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="[CODE]" lineBreakMode="tailTruncation" minimumFontSize="10" id="1258" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                        <rect key="frame" x="0.0" y="0.0" width="81.5" height="41"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" colorSpace="calibratedRGB" red="0" green="0.50196078431372548" blue="0" alpha="1"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1259" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                        <rect key="frame" x="91.5" y="0.0" width="63" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Copia">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint id="1262" firstItem="1256" firstAttribute="height" constant="41"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Copia il codice di autorizzazione e segui la procdeura sulla pagina web sottostante per autorizzare il tuo account:" lineBreakMode="wordWrap" minimumFontSize="10" id="1264" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="0">
+                                <rect key="frame" x="5" y="129.5" width="310" height="50.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint id="1145" firstItem="1093" firstAttribute="leading" secondItem="1071" secondAttribute="leading"/>
+                            <constraint id="1146" firstItem="1071" firstAttribute="bottom" secondItem="1093" secondAttribute="bottom" constant="5"/>
+                            <constraint id="1162" firstItem="1071" firstAttribute="trailing" secondItem="1093" secondAttribute="trailing"/>
+                            <constraint id="1167" firstItem="1166" firstAttribute="top" secondItem="1067" secondAttribute="bottom" constant="5"/>
+                            <constraint id="1168" firstItem="1166" firstAttribute="leading" secondItem="1071" secondAttribute="leading" constant="5"/>
+                            <constraint id="1169" firstItem="1071" firstAttribute="trailing" secondItem="1166" secondAttribute="trailing" constant="5"/>
+                            <constraint id="1253" firstItem="1250" firstAttribute="top" secondItem="1166" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1254" firstItem="1071" firstAttribute="centerX" secondItem="1250" secondAttribute="centerX" constant="10"/>
+                            <constraint id="1260" firstItem="1256" firstAttribute="top" secondItem="1166" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1261" firstItem="1071" firstAttribute="centerX" secondItem="1256" secondAttribute="centerX"/>
+                            <constraint id="1265" firstItem="1264" firstAttribute="top" secondItem="1256" secondAttribute="bottom" constant="5"/>
+                            <constraint id="1266" firstItem="1264" firstAttribute="leading" secondItem="1071" secondAttribute="leading" constant="5"/>
+                            <constraint id="1267" firstItem="1071" firstAttribute="trailing" secondItem="1264" secondAttribute="trailing" constant="5"/>
+                            <constraint id="1268" firstItem="1093" firstAttribute="top" secondItem="1264" secondAttribute="bottom" constant="5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="lblAuthorizationCode" destination="1258" id="name-outlet-1258"/>
+                        <outlet property="stackLoadingCode" destination="1250" id="name-outlet-1250"/>
+                        <outlet property="stackAuthorizationCode" destination="1256" id="name-outlet-1256"/>
+                        <outlet property="wvAuthorizationPage" destination="1093" id="name-outlet-1093"/>
+                        <outlet property="btnCopyAuthorizationCode" destination="1259" id="name-outlet-1259"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1072" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2037" y="171"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedOrientationMetrics key="orientation"/>
+    </simulatedMetricsContainer>
+    <resources>
+        <image name="app_icon.ico" width="256" height="256"/>
+        <image name="app_icon.png" width="256" height="256"/>
+        <image name="icon_settings.png" width="96" height="96"/>
+        <image name="ic_settings.imageset/ic_settings.png" width="24" height="24"/>
+        <image name="ic_settings.imageset/ic_settings_2x.png" width="48" height="48"/>
+        <image name="ic_settings.imageset/ic_settings_3x.png" width="72" height="72"/>
+        <image name="ic_settings_2x.png" width="48" height="48"/>
+        <image name="ic_settings_3x.png" width="72" height="72"/>
+        <image name="ic_settings.png" width="24" height="24"/>
+    </resources>
+</document>

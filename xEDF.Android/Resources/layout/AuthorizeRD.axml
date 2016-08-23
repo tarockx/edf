@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="E' necessario autorizzare il tuo account su xEDF. Il tuo codice di autorizzazione è mostrato qui sotto:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewLoadingCode"
+        android:layout_gravity="center_horizontal">
+        <ProgressBar
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/progressBar1"
+            android:layout_gravity="center_vertical"
+            android:indeterminate="true"
+            android:indeterminateOnly="true" />
+        <TextView
+            android:text="Sto ottenendo il codice..."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:layout_gravity="center_vertical" />
+        <Button
+            android:layout_height="wrap_content"
+            android:id="@+id/button2"
+            android:layout_width="10dp"
+            android:visibility="invisible" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewAuthorizationCode"
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:text="Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvAuthorizationCode"
+            android:layout_gravity="center_vertical"
+            android:textColor="#009933"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+        <Button
+            android:text="Copia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnCopyAuthorizationCode"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+    <TextView
+        android:text="Copia il codice di autorizzazione e segui la procdeura sulla pagina web sottostante per autorizzare il tuo account:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4" />
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/wvAuthorizationPage" />
+</LinearLayout>

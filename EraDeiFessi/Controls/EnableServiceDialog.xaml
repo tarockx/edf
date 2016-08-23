@@ -1,0 +1,22 @@
+﻿<Window x:Class="EraDeiFessi.Controls.EnableServiceDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Attivazione supporto estensione" Height="410" Width="360">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="2">
+            <TextBlock Text="Avvio del servizio per l'estensione di Chrome&#x0a;" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center"/>
+            <TextBlock Text="Il supporto all'estensione di Chrome è attivo nelle opzioni ma il servizio di supporto non è registrato. Ho bisogno di richiedere i permessi di amministrazione per attivare il servizio&#x0a;&#x0a;Se scegli di attivare il servizio ti verrà richiesto di fornire i permessi di amministrazione, dopodichè l'estensione Chrome funzionerà correttamente. Questo deve essere fatto solo una volta.&#x0a;&#x0a;In alternativa, se non utilizzi l'estensione puoi decidere di disattivare il supporto all'estensione.&#x0a;&#x0a;Cosa vuoi fare?&#x0a;&#x0a;"
+                       TextWrapping="Wrap" Margin="5">
+            </TextBlock>
+            <Button Margin="5" Height="30" Click="ButtonActivate_Click">
+                <DockPanel>
+                    <Image Source="..\Resources\icon_shield.png" Height="22" DockPanel.Dock="Left" VerticalAlignment="Center"/>
+                    <TextBlock VerticalAlignment="Center" Foreground="Green" FontWeight="Bold">Registra e attiva il servizio di supporto all'esensione</TextBlock>
+                </DockPanel>
+            </Button>
+            <Button Margin="5" FontWeight="Bold" Foreground="Red" Height="30" Click="ButtonDisable_Click">
+                Disattiva il supporto all'estensione
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
