@@ -289,7 +289,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app1.manifest" />
-    <None Include="EraDeiFessi_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -338,10 +337,6 @@
     <Resource Include="Resources\loader.gif" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\PropGrid4WPF\PropGrid4WPF\PropGrid4WPF.csproj">
-      <Project>{00015351-5ea1-45c0-968c-fe1b383ae577}</Project>
-      <Name>PropGrid4WPF</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HtmlAgilityPack\HtmlAgilityPack.csproj">
       <Project>{193bb801-054f-4729-9d5d-fce1e32594bf}</Project>
       <Name>HtmlAgilityPack</Name>
@@ -349,6 +344,10 @@
     <ProjectReference Include="..\libEraDeiFessi\libEraDeiFessi.csproj">
       <Project>{c7da9b1a-b36b-4833-afc6-254d590108e2}</Project>
       <Name>libEraDeiFessi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PropGrid4WPF\PropGrid4WPF.csproj">
+      <Project>{00015351-5ea1-45c0-968c-fe1b383ae577}</Project>
+      <Name>PropGrid4WPF</Name>
     </ProjectReference>
     <ProjectReference Include="..\RealDebrid4DotNet\RealDebrid4DotNet.csproj">
       <Project>{24c0ba97-8d12-4938-940b-f66a321dd2cd}</Project>

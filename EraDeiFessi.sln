@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EraDeiFessi", "EraDeiFessi\EraDeiFessi.csproj", "{FFBAD596-76B0-4F9D-B26F-337824AD37F5}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -53,8 +53,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EraDeiFessi.WebFormsApp", "
 		{59A66BF0-A934-4B6D-9292-9CC4016DCDB7} = {59A66BF0-A934-4B6D-9292-9CC4016DCDB7}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropGrid4WPF", "..\PropGrid4WPF\PropGrid4WPF\PropGrid4WPF.csproj", "{00015351-5EA1-45C0-968C-FE1B383AE577}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDFPlugin.SimpleFileSearch", "EDFPlugin.SimpleFileSearch\EDFPlugin.SimpleFileSearch.csproj", "{6B98CE34-7ACC-43D7-9AF7-13DE386EB1E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDFPlugin.DownloadNow", "EDFPlugin.DownloadNow\EDFPlugin.DownloadNow.csproj", "{3A052549-983C-46BC-ADF3-0EE2E913F630}"
@@ -86,6 +84,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDFPlugin.RARBG", "EDFPlugin.RARBG\EDFPlugin.RARBG.csproj", "{0779A77A-BD85-48B5-A0CB-FBDDBA2835DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealDebrid4DotNet", "RealDebrid4DotNet\RealDebrid4DotNet.csproj", "{24C0BA97-8D12-4938-940B-F66A321DD2CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropGrid4WPF", "PropGrid4WPF\PropGrid4WPF.csproj", "{00015351-5EA1-45C0-968C-FE1B383AE577}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -209,18 +209,6 @@ Global
 		{FDB61A6A-87C1-4F93-BA94-0E89DF50232B}.Release|iPhone.Build.0 = Release|Any CPU
 		{FDB61A6A-87C1-4F93-BA94-0E89DF50232B}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{FDB61A6A-87C1-4F93-BA94-0E89DF50232B}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{00015351-5EA1-45C0-968C-FE1B383AE577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00015351-5EA1-45C0-968C-FE1B383AE577}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00015351-5EA1-45C0-968C-FE1B383AE577}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{00015351-5EA1-45C0-968C-FE1B383AE577}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{00015351-5EA1-45C0-968C-FE1B383AE577}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{00015351-5EA1-45C0-968C-FE1B383AE577}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{00015351-5EA1-45C0-968C-FE1B383AE577}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{00015351-5EA1-45C0-968C-FE1B383AE577}.Release|Any CPU.Build.0 = Release|Any CPU
-		{00015351-5EA1-45C0-968C-FE1B383AE577}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{00015351-5EA1-45C0-968C-FE1B383AE577}.Release|iPhone.Build.0 = Release|Any CPU
-		{00015351-5EA1-45C0-968C-FE1B383AE577}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{00015351-5EA1-45C0-968C-FE1B383AE577}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{6B98CE34-7ACC-43D7-9AF7-13DE386EB1E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6B98CE34-7ACC-43D7-9AF7-13DE386EB1E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B98CE34-7ACC-43D7-9AF7-13DE386EB1E8}.Debug|iPhone.ActiveCfg = Debug|Any CPU
@@ -409,92 +397,20 @@ Global
 		{24C0BA97-8D12-4938-940B-F66A321DD2CD}.Release|iPhone.Build.0 = Release|Any CPU
 		{24C0BA97-8D12-4938-940B-F66A321DD2CD}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{24C0BA97-8D12-4938-940B-F66A321DD2CD}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{00015351-5EA1-45C0-968C-FE1B383AE577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00015351-5EA1-45C0-968C-FE1B383AE577}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00015351-5EA1-45C0-968C-FE1B383AE577}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{00015351-5EA1-45C0-968C-FE1B383AE577}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{00015351-5EA1-45C0-968C-FE1B383AE577}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{00015351-5EA1-45C0-968C-FE1B383AE577}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{00015351-5EA1-45C0-968C-FE1B383AE577}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00015351-5EA1-45C0-968C-FE1B383AE577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00015351-5EA1-45C0-968C-FE1B383AE577}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{00015351-5EA1-45C0-968C-FE1B383AE577}.Release|iPhone.Build.0 = Release|Any CPU
+		{00015351-5EA1-45C0-968C-FE1B383AE577}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{00015351-5EA1-45C0-968C-FE1B383AE577}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 27
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs14
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = EraDeiFessi\\EraDeiFessi.csproj
-		SccProjectName1 = EraDeiFessi
-		SccLocalPath1 = EraDeiFessi
-		SccProjectUniqueName2 = EDFUpdater\\EDFUpdater.csproj
-		SccProjectName2 = EDFUpdater
-		SccLocalPath2 = EDFUpdater
-		SccProjectUniqueName3 = libEraDeiFessi\\libEraDeiFessi.csproj
-		SccProjectName3 = libEraDeiFessi
-		SccLocalPath3 = libEraDeiFessi
-		SccProjectUniqueName4 = EDFPlugin.EraDeiPesci\\EDFPlugin.EraDeiPesci.csproj
-		SccProjectName4 = EDFPlugin.EraDeiPesci
-		SccLocalPath4 = EDFPlugin.EraDeiPesci
-		SccProjectUniqueName5 = EDFPlugin.Cineblog01\\EDFPlugin.Cineblog01.csproj
-		SccProjectName5 = EDFPlugin.Cineblog01
-		SccLocalPath5 = EDFPlugin.Cineblog01
-		SccProjectUniqueName6 = EDFPlugin.FilesTube\\EDFPlugin.FilesTube.csproj
-		SccProjectName6 = EDFPlugin.FilesTube
-		SccLocalPath6 = EDFPlugin.FilesTube
-		SccProjectUniqueName7 = EDFPlugin.PirateStreaming\\EDFPlugin.PirateStreaming.csproj
-		SccProjectName7 = EDFPlugin.PirateStreaming
-		SccLocalPath7 = EDFPlugin.PirateStreaming
-		SccProjectUniqueName8 = EDFPlugin.Eurostreaming\\EDFPlugin.Eurostreaming.csproj
-		SccProjectName8 = EDFPlugin.Eurostreaming
-		SccLocalPath8 = EDFPlugin.Eurostreaming
-		SccProjectUniqueName9 = libRealDebrid4DotNet\\libRealDebrid4DotNet.csproj
-		SccProjectName9 = libRealDebrid4DotNet
-		SccLocalPath9 = libRealDebrid4DotNet
-		SccProjectUniqueName10 = EraDeiFessi.WebFormsApp\\EraDeiFessi.WebFormsApp.csproj
-		SccProjectName10 = EraDeiFessi.WebFormsApp
-		SccLocalPath10 = EraDeiFessi.WebFormsApp
-		SccProjectUniqueName11 = EDFPlugin.SimpleFileSearch\\EDFPlugin.SimpleFileSearch.csproj
-		SccProjectName11 = EDFPlugin.SimpleFileSearch
-		SccLocalPath11 = EDFPlugin.SimpleFileSearch
-		SccProjectUniqueName12 = EDFPlugin.DownloadNow\\EDFPlugin.DownloadNow.csproj
-		SccProjectName12 = EDFPlugin.DownloadNow
-		SccLocalPath12 = EDFPlugin.DownloadNow
-		SccProjectUniqueName13 = EDFPlugin.ShareDir\\EDFPlugin.ShareDir.csproj
-		SccProjectName13 = EDFPlugin.ShareDir
-		SccLocalPath13 = EDFPlugin.ShareDir
-		SccProjectUniqueName14 = EDFPlugin.AllUC\\EDFPlugin.AllUC.csproj
-		SccProjectName14 = EDFPlugin.AllUC
-		SccLocalPath14 = EDFPlugin.AllUC
-		SccProjectUniqueName15 = EDFPlugin.Filespr\\EDFPlugin.Filespr.csproj
-		SccProjectName15 = EDFPlugin.Filespr
-		SccLocalPath15 = EDFPlugin.Filespr
-		SccProjectUniqueName16 = EDFPlugin.ItaliaSerie\\EDFPlugin.ItaliaSerie.csproj
-		SccProjectName16 = EDFPlugin.ItaliaSerie
-		SccLocalPath16 = EDFPlugin.ItaliaSerie
-		SccProjectUniqueName17 = EDFPlugin.IlCorsaroNero\\EDFPlugin.IlCorsaroNero.csproj
-		SccProjectName17 = EDFPlugin.IlCorsaroNero
-		SccLocalPath17 = EDFPlugin.IlCorsaroNero
-		SccProjectUniqueName18 = ReferencesRepo\\ReferencesRepo.csproj
-		SccProjectName18 = ReferencesRepo
-		SccLocalPath18 = ReferencesRepo
-		SccProjectUniqueName19 = EDFPlugin.WarezBB\\EDFPlugin.WarezBB.csproj
-		SccProjectName19 = EDFPlugin.WarezBB
-		SccLocalPath19 = EDFPlugin.WarezBB
-		SccProjectUniqueName20 = HtmlAgilityPack\\HtmlAgilityPack.csproj
-		SccProjectName20 = HtmlAgilityPack
-		SccLocalPath20 = HtmlAgilityPack
-		SccProjectUniqueName21 = xEDF.iOS\\xEDF.iOS.csproj
-		SccProjectName21 = xEDF.iOS
-		SccLocalPath21 = xEDF.iOS
-		SccProjectUniqueName22 = xEDF.Android\\xEDF.Droid.csproj
-		SccProjectName22 = xEDF.Android
-		SccLocalPath22 = xEDF.Android
-		SccProjectUniqueName23 = xEDFlib\\xEDFlib.csproj
-		SccProjectName23 = xEDFlib
-		SccLocalPath23 = xEDFlib
-		SccProjectUniqueName24 = EDFPlugin.ThePirateBay\\EDFPlugin.ThePirateBay.csproj
-		SccProjectName24 = EDFPlugin.ThePirateBay
-		SccLocalPath24 = EDFPlugin.ThePirateBay
-		SccProjectUniqueName25 = EDFPlugin.RARBG\\EDFPlugin.RARBG.csproj
-		SccProjectName25 = EDFPlugin.RARBG
-		SccLocalPath25 = EDFPlugin.RARBG
-		SccProjectUniqueName26 = RealDebrid4DotNet\\RealDebrid4DotNet.csproj
-		SccProjectName26 = RealDebrid4DotNet
-		SccLocalPath26 = RealDebrid4DotNet
 	EndGlobalSection
 EndGlobal
