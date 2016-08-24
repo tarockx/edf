@@ -1,14 +1,13 @@
-﻿using Ionic.Zip;
-using libEraDeiFessi.Plugins;
+﻿using libEraDeiFessi.Plugins;
+using log4net;
+using log4net.Config;
 using Microsoft.Shell;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
+
+[assembly: XmlConfigurator(Watch = true)]
 
 namespace EraDeiFessi
 {
@@ -17,13 +16,15 @@ namespace EraDeiFessi
     /// </summary>
     public partial class App : Application, ISingleInstanceApp
     {
-        public static bool SHOW_DEBUG_MESSAGES { get; set; }
+        public static bool SHOW_DEBUG_MESSAGES { get; private set; }
+        public static ILog Logger { get; private set; }
 
 
         private const string Unique = "EraDeiFessi";
         [STAThread]
         public static void Main()
         {            
+            Logger = log4net.LogManager.GetLogger(typeof(App));
             
 
             SHOW_DEBUG_MESSAGES = Environment.GetCommandLineArgs().Contains("--SHOW_DEBUG_MESSAGES");
@@ -49,9 +50,6 @@ namespace EraDeiFessi
                 string dir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\EraDeiFessi\\subtitles\\";
                 if (System.IO.Directory.Exists(dir))
                     System.IO.Directory.Delete(dir, true);
-                //dir = Constants.TorrentDownloadFolder;
-                //if (System.IO.Directory.Exists(dir))
-                //    System.IO.Directory.Delete(dir, true);
             }
             catch { }
         }
