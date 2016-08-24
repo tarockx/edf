@@ -95,15 +95,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\plugins\EDFPlugin.AllUC.dll" />
-    <Content Include="App_Data\plugins\EDFPlugin.Eurostreaming.dll" />
-    <Content Include="App_Data\plugins\EDFPlugin.Filespr.dll" />
-    <Content Include="App_Data\plugins\EDFPlugin.ItaliaSerie.dll" />
-    <Content Include="App_Data\plugins\EDFPlugin.PirateStreaming.dll" />
-    <Content Include="App_Data\plugins\EDFPlugin.RARBG.dll" />
-    <Content Include="App_Data\plugins\EDFPlugin.ShareDir.dll" />
-    <Content Include="App_Data\plugins\EDFPlugin.ThePirateBay.dll" />
-    <Content Include="App_Data\plugins\EDFPlugin.WarezBB.dll" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -210,7 +201,9 @@
       <Name>libEraDeiFessi</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\plugins\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
