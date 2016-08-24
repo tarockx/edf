@@ -264,7 +264,7 @@ namespace RealDebrid4DotNet
                 SupportedDomainsRequestResponse supportedHostsRequestResponse = new SupportedDomainsRequestResponse(response);
                 supportedHosts = supportedHostsRequestResponse.SupportedHosters;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }

@@ -31,5 +31,10 @@ namespace libEraDeiFessi
             Bookmark p = (Bookmark)obj;
             return Url.Equals(p.Url) && PluginID.Equals(p.PluginID);
         }
+
+        public override int GetHashCode()
+        {
+            return Url.GetHashCode() ^ PluginID.GetHashCode();
+        }
     }
 }
