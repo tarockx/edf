@@ -22,6 +22,7 @@ using PropGrid4WPF;
 using System.Diagnostics;
 using EraDeiFessi.Helpers;
 using EraDeiFessi.Torrents;
+using log4net;
 
 namespace EraDeiFessi
 {
@@ -30,6 +31,8 @@ namespace EraDeiFessi
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static ILog Logger { get; private set; } = LogManager.GetLogger(typeof(MainWindow));
+
         #region "Binding data"
 
         public Bookmark CurrentContent { get; set; }
@@ -46,11 +49,13 @@ namespace EraDeiFessi
         {
             try
             {
+                Logger.Debug("Initializing Google suggestions provider");
                 SuggestionsProvider = new Helpers.GoogleSuggestionsProvider();
 
+                Logger.Debug("Initializing MainWindow's XAML components");
                 InitializeComponent();
 
-
+                Logger.Debug("Hooking events");
                 BookmarkManager.BookmarkSelected += new BookmarkManager.BookmarkSelectedEventHandler(GoToBookmark);
                 BookmarkManager.BookmarkDeleted += new BookmarkManager.BookmarkDeletedEventHandler(DeletedBookmark);
                 BookmarkManager.GetMoreResults += new BookmarkManager.GetMoreResultsEventHandler(GetMoreResults);
@@ -59,7 +64,9 @@ namespace EraDeiFessi
                 HistoryManager.HistoryUpdated += new HistoryManager.HistoryUpdatedEventHandler(UpdateHistory);
                 HistoryManager.HistoryModeToggled += new HistoryManager.HistoryModeToggledEventHandler(RecheckHistoryMode);
 
+                Logger.Debug("Loading saved bookmarks");
                 LoadBookmarks();
+
 
                 var searchplugins = (from p in PluginsRepo.Plugins.Values where p is IEDFSearch select p as IEDFSearch).ToList();
                 if (searchplugins != null)
@@ -71,12 +78,16 @@ namespace EraDeiFessi
 
                 //start the webservice, if enabled
                 if (Repo.Settings.EnableExtensionService)
+                {
+                    Logger.Debug("Starting EDF webservice");
                     ServicesManager.StartListening();
+                }
 
 
             }
             catch (Exception ex)
             {
+                Logger.Debug("Exception in MainWindow()", ex);
                 if (App.SHOW_DEBUG_MESSAGES)
                     MessageBox.Show("Eccezione non gestita:\n\n" + ex.Message + "\n\n" + ex.StackTrace, "Eccezione non gestita", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
@@ -90,8 +101,12 @@ namespace EraDeiFessi
             try
             {
                 if (Repo.Settings.CheckForUpdates)
+                {
+                    Logger.Debug("Checking for updates...");
                     CheckForUpdates();
+                }
 
+                Logger.Debug("Setting up UI...");
                 SetEnabledControls();
                 lpHistoryToggle.Size = 12;
 
@@ -102,9 +117,11 @@ namespace EraDeiFessi
                 SetZoomFromComboBox();
                 SetDefaultTabFromComboBox();
 
+                Logger.Debug("Checking credentials and logging into RealDebrid");
                 Repo.RDAgent.TokenRefreshed += (trsender, tre) => { RecheckRD(); };
                 RecheckRD();
 
+                Logger.Debug("Restoring settings");
                 chkCheckForUpdates.IsChecked = Repo.Settings.CheckForUpdates;
                 chkEnableExtensionService.IsChecked = Repo.Settings.EnableExtensionService;
                 chkMinimizeToTray.IsChecked = Repo.Settings.MinimizeToTray;
@@ -142,6 +159,7 @@ namespace EraDeiFessi
             }
             catch (Exception ex)
             {
+                Logger.Debug("Exception in MainWindow.Window_Loaded()", ex);
                 if (App.SHOW_DEBUG_MESSAGES)
                     MessageBox.Show("Eccezione non gestita:\n\n" + ex.Message + "\n\n" + ex.StackTrace, "Eccezione non gestita", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
