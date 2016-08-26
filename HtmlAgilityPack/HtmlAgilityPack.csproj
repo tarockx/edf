@@ -122,4 +122,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)EraDeiFessi.WebFormsApp\App_Data\plugins\$(ProjectName).dll"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -63,7 +63,7 @@
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)EraDeiFessi\bin\Release\plugins\$(ProjectName).dll"
 copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)EraDeiFessi\bin\Debug\plugins\$(ProjectName).dll"
-copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)EraDeiFessi.WebFormsApp\App_Data\plugins\$(ProjectName).dll"</PostBuildEvent>
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
