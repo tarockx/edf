@@ -33,6 +33,13 @@
                                 </Grid.ColumnDefinitions>
 
                                 <StackPanel Orientation="Vertical" Margin="2" ToolTip="{Binding Name}" MouseDown="StackPanel_MouseDown">
+                                    <StackPanel.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Copia link originale negli appunti" Click="originalLink_Copy"></MenuItem>
+                                            <MenuItem Header="Apri link originale nel browser" Click="originalLink_Open"></MenuItem>
+                                        </ContextMenu>
+                                    </StackPanel.ContextMenu>
+                                    
                                     <TextBlock Margin="2" FontWeight="Bold" FontSize="12" Text="{Binding Name}"/>
                                     <TextBlock Margin="2" FontWeight="Normal" Foreground="Gray" FontSize="11" Text="{Binding Subtitle}" Visibility="{Binding HasMetadata, Converter={StaticResource bool2vis_inv}}"/>
                                     <StackPanel Margin="2" Orientation="Horizontal" Visibility="{Binding HasMetadata, Converter={StaticResource bool2vis}}">

@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using libEraDeiFessi;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace EraDeiFessi.Controls
 {
@@ -96,7 +97,7 @@ namespace EraDeiFessi.Controls
 
         private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount >= 2)
+            if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount >= 2)
             {
                 Bookmark b = (Bookmark)((FrameworkElement)sender).DataContext;
                 OnBookmarkSelected(new BookmarkSelectedEventArgs(b));
@@ -158,6 +159,25 @@ namespace EraDeiFessi.Controls
         }
         public delegate void GetMoreResultsEventHandler(object sender, GetMoreResultsEventArgs e);
 
+        private void originalLink_Copy(object sender, RoutedEventArgs e)
+        {
+            Bookmark b = (Bookmark)((FrameworkElement)sender).DataContext;
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    Clipboard.SetText(b.Url);
+                    return;
+                }
+                catch { }
+                System.Threading.Thread.Sleep(10);
+            }
+        }
 
+        private void originalLink_Open(object sender, RoutedEventArgs e)
+        {
+            Bookmark b = (Bookmark)((FrameworkElement)sender).DataContext;
+            Process.Start(b.Url);
+        }
     }
 }

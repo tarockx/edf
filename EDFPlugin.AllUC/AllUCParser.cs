@@ -114,12 +114,13 @@ namespace EDFPlugin.AllUC
 
                         for (int i = 0; i < substrings.Length; i++)
                         {
+                            substrings[i] = substrings[i].Trim();
                             if (i == 0)
-                                hoster = substrings[i].Trim();
+                                hoster = substrings[i];
                             else if (substrings[i].EndsWith(" B") || substrings[i].EndsWith(" KB") || substrings[i].EndsWith(" MB") || substrings[i].EndsWith(" GB"))
-                                size = substrings[i].Trim();
+                                size = substrings[i];
                             else if (DateTime.TryParseExact(substrings[i], "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out date))
-                                datestring = substrings[i].Trim();
+                                datestring = substrings[i];
                         }
                         //var subtitlehostnode = subtitlenode.SelectSingleNode("descendant::a");
                         if (hoster != null || size != null || datestring != null)
@@ -221,28 +222,44 @@ namespace EDFPlugin.AllUC
                 HtmlDocument doc = new HtmlDocument();
                 doc.LoadHtml(qresult);
 
-                var maintitle = doc.DocumentNode.SelectSingleNode("//div[contains(@class, 'linkdetails')]/h1");
-                var links = doc.DocumentNode.SelectNodes("//div[contains(@class, 'linkdetails')]/descendant::div[@class = 'linktitleurl']/a");
-                //var maindiv = doc.DocumentNode.SelectSingleNode("//pre[@id='copy_paste_links']");
+                var maintitle = doc.DocumentNode.SelectSingleNode("//div[contains(@class, 'linkdetails')]/descendant::h1");
+                var linkdivs = doc.DocumentNode.SelectNodes("//div[contains(@class, 'linkdetails')]/descendant::div[@class = 'linktitleurl']");
 
-                if (links != null)
+
+                if (linkdivs != null)
                 {
                     NestBlock nb = new NestBlock() { Title = maintitle.InnerText.Trim() };
 
-                    foreach (var link in links)
+                    foreach (var linkdiv in linkdivs)
                     {
-                        var href = link.GetAttributeValue("href", string.Empty);
-                        if (href.Contains("alluc.") || string.IsNullOrEmpty(href) || href.StartsWith("/"))
-                            continue;
-
-                        var title = link.InnerText.Trim();
-
-                        if (!string.IsNullOrWhiteSpace(href) && !string.IsNullOrWhiteSpace(title) && !IsDuplicate(href, nb))
+                        try
                         {
-                            ContentNestBlock cnb = new ContentNestBlock();
-                            cnb.Title = title;
-                            cnb.Links.Add(new Link(cnb.Title, href));
-                            nb.Children.Add(cnb);
+                            var decscript = linkdiv.SelectSingleNode("descendant::script").InnerText;
+                            string startTag = "decrypt(";
+                            string endTag = " ));";
+                            decscript = decscript.Substring(decscript.IndexOf(startTag) + startTag.Length);
+                            decscript = decscript.Substring(0, decscript.IndexOf(endTag));
+                            string[] encryptedVals = decscript.Replace("'", string.Empty).Split(',');
+                            string href = decryptUrl(encryptedVals[0].Trim(), encryptedVals[1].Trim());
+
+                            var link = linkdiv.SelectSingleNode("descendant::a");
+
+                            if (href.Contains("alluc.") || string.IsNullOrEmpty(href) || href.StartsWith("/"))
+                                continue;
+
+                            var title = link.InnerText.Trim();
+
+                            if (!string.IsNullOrWhiteSpace(href) && !string.IsNullOrWhiteSpace(title) && !IsDuplicate(href, nb))
+                            {
+                                ContentNestBlock cnb = new ContentNestBlock();
+                                cnb.Title = title;
+                                cnb.Links.Add(new Link(cnb.Title, href));
+                                nb.Children.Add(cnb);
+                            }
+                        }
+                        catch
+                        {
+                            continue;
                         }
 
                     }
@@ -263,6 +280,24 @@ namespace EDFPlugin.AllUC
                 if (response != null)
                     response.Close();
             }
+        }
+
+        private string decryptUrl(string encoded, string e)
+        {
+            byte[] bytes = Convert.FromBase64String(encoded);
+
+            string t = "";
+            string r = Encoding.UTF7.GetString(bytes);
+            int o = 0;
+            for (o = 0; o < r.Length; o++)
+            {
+                string n = r.Substring(o, 1);
+                int start = o % e.Length - 1;
+                string a = e.Substring(start >= 0 ? start : e.Length + start , 1);
+                int ncode = (int)Math.Floor((double)(Convert.ToInt32(n[0]) - Convert.ToInt32(a[0])));
+                t += Convert.ToChar(ncode);
+            }
+            return t;
         }
     }
 
