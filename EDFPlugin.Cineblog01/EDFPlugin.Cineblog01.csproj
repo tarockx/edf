@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\EraDeiFessi\bin\Debug\plugins\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -34,14 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RazorHosting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleBrowser.0.5.61.0\lib\net40\RazorHosting.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SimpleBrowser, Version=0.5.61.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleBrowser.0.5.61.0\lib\net40\SimpleBrowser.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -51,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CartoonPlugin.cs" />
     <Compile Include="Cineblog01Parser.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,7 +65,8 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)EraDeiFessi\bin\Release\plugins\$(ProjectName).dll"
-copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)EraDeiFessi.WebFormsApp\App_Data\plugins\$(ProjectName).dll"</PostBuildEvent>
+copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)EraDeiFessi\bin\Debug\plugins\$(ProjectName).dll"
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

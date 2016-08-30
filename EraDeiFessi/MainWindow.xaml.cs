@@ -551,8 +551,12 @@ namespace EraDeiFessi
         {
             if (res != null && !string.IsNullOrEmpty(res.Content))
             {
+                //browserMovieLinks.Navigating -= browserMovieLinks_Navigating;
 
                 browserMovieLinks.NavigateToString(res.Content);
+                //browserMovieLinks.DocumentText = res.Content;
+
+                //browserMovieLinks.Navigating += browserMovieLinks_Navigating;
 
                 if (!string.IsNullOrWhiteSpace(res.CoverImageUrl))
                     SetCoverImageAsync(res.CoverImageUrl);
@@ -567,6 +571,8 @@ namespace EraDeiFessi
                 lblMovieTitle.Text = CurrentContent.Name;
             }
         }
+
+        
 
         private void ChangeTorrentContent(TorrentContent res)
         {
@@ -626,6 +632,7 @@ namespace EraDeiFessi
             imgCover.Source = null;
             lblDescription.Text = string.Empty;
             browserMovieLinks.NavigateToString("&nbsp;");
+            //browserMovieLinks.DocumentText = "&nbsp;";
             ClearTabLinks();
             SetEnabledControls();
         }
@@ -817,7 +824,6 @@ namespace EraDeiFessi
             if (e.Uri != null)
             {
                 e.Cancel = true;
-                //var def = tabItemDefaultMessage;
                 tabLinks.Items.Clear();
 
                 string url = e.Uri.ToString();
@@ -832,6 +838,7 @@ namespace EraDeiFessi
             }
 
         }
+
         #endregion
 
         #region Options and About screen

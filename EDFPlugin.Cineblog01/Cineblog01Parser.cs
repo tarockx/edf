@@ -1,15 +1,10 @@
 ﻿using HtmlAgilityPack;
 using libEraDeiFessi;
-using SimpleBrowser;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Web;
 
 namespace EDFPlugin.Cineblog01
 {
@@ -23,6 +18,7 @@ namespace EDFPlugin.Cineblog01
 
         public SearchResult PerformSearch(string searchTerm, SearchSection section)
         {
+            /*
             string searchurl = string.Empty;
             switch (section)
             {
@@ -39,6 +35,83 @@ namespace EDFPlugin.Cineblog01
 
             
             return GetResultPage(searchurl);
+            */
+
+            return GetResultPageFromList(searchTerm, section);
+        }
+
+        public SearchResult GetResultPageFromList(string searchTerm, SearchSection searchSection)
+        {
+            List<Bookmark> res = new List<Bookmark>();
+            string[] terms = searchTerm.Split(new Char[] { ' ', '\n', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+
+            try
+            {
+                RequestMaker requestMaker = new RequestMaker();
+
+                string listUrl = null;
+                if (searchSection == SearchSection.Movies) {
+                    listUrl = Constants.Cineblog01ListaFilmUrl;
+                }
+                else if (searchSection == SearchSection.Movies) {
+                    listUrl = Constants.Cineblog01ListaSerieUrl;
+                }
+
+                string result = requestMaker.MakeRequest(listUrl);
+
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(result);
+
+                HtmlNodeCollection links = null;
+
+                if (searchSection == SearchSection.Movies)
+                {
+                    var tables = doc.DocumentNode.SelectNodes("descendant-or-self::td");
+                    HtmlNode table = null;
+                    foreach (var t in tables)
+                    {
+                        if (table == null || table.InnerHtml.Length < t.InnerHtml.Length)
+                        {
+                            table = t;
+                        }
+                    }
+
+                    links = table.SelectNodes("descendant::a");
+                }
+                else if(searchSection == SearchSection.Series)
+                {
+                    links = doc.DocumentNode.SelectNodes("descendant::ul/li/a");
+                }
+
+
+                foreach (var link in links)
+                {
+                    string linktext = link.InnerText.Trim();
+                    bool match = true;
+                    foreach (var term in terms)
+                    {
+                        if (!linktext.ToLower().Contains(term.Trim().ToLower()))
+                        {
+                            match = false;
+                            break;
+                        }
+                    }
+
+                    if (match)
+                    {
+                        Bookmark bm = new Bookmark(pluginID, ParsingHelpers.ConvertHtml(link.InnerHtml), link.GetAttributeValue("href", string.Empty));
+                        res.Add(bm);
+                    }
+
+                }
+
+
+                return new SearchResult() { Result = res, NextPageUrl = null };
+            }
+            catch
+            {
+                return new SearchResult() { Error = "Errore nella ricerca: la pagina di Cineblog non è raggiungibile o ha subito una modifica che necessita l'aggiornamento del plugin" };
+            }
         }
 
 
@@ -51,29 +124,13 @@ namespace EDFPlugin.Cineblog01
 
             try
             {
-                try
-                {
-                    SimpleBrowser.Browser browser = new SimpleBrowser.Browser();
-                browser.UserAgent = "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.10 (KHTML, like Gecko) Chrome/8.0.552.224 Safari/534.10";
-                browser.AutoRedirect = true;
-                //browser.Navigate(Constants.Cineblog01HomepageUrl);
-                browser.Navigate(uri);
-
-        
-                while (browser.Find("div", FindBy.Text, "UFFICIALE") == null)
-                    System.Threading.Thread.Sleep(2000);
-                qresult = browser.CurrentHtml;
-                }
-                catch (WebException ex)
-                {
-                }
-
-                //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-                //request.UserAgent = "Lynx/2.8.8dev.3 libwww-FM/2.14 SSL-MM/1.4.1";
-                //request.Method = "GET";
-                //response = request.GetResponse();
-                //reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
-                //qresult = reader.ReadToEnd();
+                
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                request.UserAgent = "Lynx/2.8.8dev.3 libwww-FM/2.14 SSL-MM/1.4.1";
+                request.Method = "GET";
+                response = request.GetResponse();
+                reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+                qresult = reader.ReadToEnd();
 
                 HtmlDocument doc = new HtmlDocument();
                 doc.LoadHtml(qresult);
@@ -356,9 +413,9 @@ namespace EDFPlugin.Cineblog01
                         if (downlaodHD != null)
                             downlaodHD.Remove();
 
-                        result = "<head> <meta http-equiv='Content-Type' content='text/html;charset=UTF-8'> </head> <body> ";
+                        result = "<html> <head> <meta http-equiv='Content-Type' content='text/html;charset=UTF-8' /> </head> <body> ";
                         result += linkstable.OuterHtml;
-                        result += "</body>";
+                        result += "</body> </html>";
                         result = result.Replace("target=\"_blank\"", "target=\"_self\"");
 
                         parseresult = new HtmlContent();

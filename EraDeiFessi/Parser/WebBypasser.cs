@@ -22,7 +22,7 @@ namespace EraDeiFessi.Parser
             Settings.Instance.AutoMoveMousePointerToTopLeft = false;
         }
 
-        private static string[] supportedDomains = new string[] { "adf.ly", "q.gs", "cineblog01.pw" };
+        private static string[] supportedDomains = new string[] { "adf.ly", "q.gs", "cineblog01.pw", "swzz.xyz" };
 
         public static bool IsLinkSupported(string link)
         {
@@ -38,7 +38,7 @@ namespace EraDeiFessi.Parser
         {
             if (link.ToLower().Contains("adf.ly") || link.ToLower().Contains("q.gs"))
                 return BypassAdfLy(link);
-            if (link.ToLower().Contains("cineblog01.pw"))
+            if (link.ToLower().Contains("cineblog01.pw") || link.ToLower().Contains("swzz.xyz"))
                 return BypassCineblog01pw(link, referer);
 
             return string.Empty;
@@ -99,7 +99,7 @@ namespace EraDeiFessi.Parser
                 HtmlDocument doc = new HtmlDocument();
                 doc.LoadHtml(resp);
 
-                var buttonlink = doc.DocumentNode.SelectSingleNode("descendant-or-self::a[@class='btn-wrapper']");
+                var buttonlink = doc.DocumentNode.SelectSingleNode("descendant::a[contains(@class, 'link') and contains(@class, 'btn-wrapper')]");
                 string href = buttonlink.GetAttributeValue("href", string.Empty);
 
                 return href;
