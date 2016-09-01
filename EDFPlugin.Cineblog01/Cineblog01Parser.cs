@@ -53,7 +53,7 @@ namespace EDFPlugin.Cineblog01
                 if (searchSection == SearchSection.Movies) {
                     listUrl = Constants.Cineblog01ListaFilmUrl;
                 }
-                else if (searchSection == SearchSection.Movies) {
+                else if (searchSection == SearchSection.Series) {
                     listUrl = Constants.Cineblog01ListaSerieUrl;
                 }
 
@@ -352,12 +352,25 @@ namespace EDFPlugin.Cineblog01
                 if (disq != null)
                     disq.Remove();
 
+                //remove ads/twitter
+                var twitter = maindiv.SelectSingleNode("descendant::div[contains(@id, 'twitter_button')]");
+                if(twitter != null)
+                {
+                    twitter.Remove();
+                }
+
                 //extract cover & description
                 try
                 {
                     var img = maindiv.SelectSingleNode("descendant-or-self::img");
                     if (img != null)
+                    {
                         imageurl = img.GetAttributeValue("src", string.Empty);
+                        if(!string.IsNullOrEmpty(imageurl) && imageurl.StartsWith("/"))
+                        {
+                            imageurl = (Constants.Cineblog01HomepageUrl + imageurl).Replace("//", "/");
+                        }
+                    }
 
                     var descp = maindiv.SelectNodes("descendant::p");
                     if (descp != null)
