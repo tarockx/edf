@@ -1,20 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C7DA9B1A-B36B-4833-AFC6-254D590108E2}</ProjectGuid>
+    <ProjectGuid>{8AD83A4F-4B61-417E-B531-FD6B2ADA8FC7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>libEraDeiFessi</RootNamespace>
-    <AssemblyName>libEraDeiFessi</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>EDFPlugin.FilmPerTutti</RootNamespace>
+    <AssemblyName>EDFPlugin.FilmPerTutti</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,48 +32,36 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bookmark.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="ContentMetadata.cs" />
-    <Compile Include="CookieAwareWebClient.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Plugins\PluginOptionsRepo.cs" />
-    <Compile Include="Responses\ContentNestBlock.cs" />
-    <Compile Include="Helpers\DomainExtractor.cs" />
-    <Compile Include="HistoryContainer.cs" />
-    <Compile Include="HistoryEntry.cs" />
-    <Compile Include="Responses\HtmlContent.cs" />
-    <Compile Include="Link.cs" />
-    <Compile Include="LinkMetadata.cs" />
-    <Compile Include="Responses\NestBlock.cs" />
-    <Compile Include="Responses\ParseResult.cs" />
-    <Compile Include="Helpers\ParsingHelpers.cs" />
-    <Compile Include="Plugins\IEDFPlugin.cs" />
-    <Compile Include="Responses\NestedContent.cs" />
-    <Compile Include="Plugins\PluginLoader.cs" />
-    <Compile Include="Plugins\PluginsRepo.cs" />
+    <Compile Include="Parser.cs" />
+    <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Helpers\RequestMaker.cs" />
-    <Compile Include="Responses\SearchResult.cs" />
-    <Compile Include="SerializableDictionary.cs" />
-    <Compile Include="Responses\TorrentContent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HtmlAgilityPack\HtmlAgilityPack.csproj">
       <Project>{193bb801-054f-4729-9d5d-fce1e32594bf}</Project>
       <Name>HtmlAgilityPack</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\libEraDeiFessi\libEraDeiFessi.csproj">
+      <Project>{c7da9b1a-b36b-4833-afc6-254d590108e2}</Project>
+      <Name>libEraDeiFessi</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)EraDeiFessi\bin\Release\plugins\$(ProjectName).dll"
+copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)EraDeiFessi\bin\Debug\plugins\$(ProjectName).dll"
+copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)EraDeiFessi.WebFormsApp\App_Data\plugins\$(ProjectName).dll"
+</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

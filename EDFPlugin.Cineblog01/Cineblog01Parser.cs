@@ -16,31 +16,7 @@ namespace EDFPlugin.Cineblog01
         public Cineblog01Parser(string pID) { pluginID = pID; }
 
 
-        public SearchResult PerformSearch(string searchTerm, SearchSection section)
-        {
-            /*
-            string searchurl = string.Empty;
-            switch (section)
-            {
-                case SearchSection.Movies:
-                    searchurl = Constants.Cineblog01SearchUrl.Replace("$searchterm$", WebUtility.UrlEncode(searchTerm));
-                    break;
-                case SearchSection.Cartoons:
-                    searchurl = Constants.Cineblog01CartoonSearchUrl.Replace("$searchterm$", WebUtility.UrlEncode(searchTerm));
-                    break;
-                case SearchSection.Series:
-                    searchurl = Constants.Cineblog01SeriesSearchUrl.Replace("$searchterm$", WebUtility.UrlEncode(searchTerm));
-                    break;
-            }
-
-            
-            return GetResultPage(searchurl);
-            */
-
-            return GetResultPageFromList(searchTerm, section);
-        }
-
-        public SearchResult GetResultPageFromList(string searchTerm, SearchSection searchSection)
+        public SearchResult PerformSearch(string searchTerm, SearchSection searchSection)
         {
             List<Bookmark> res = new List<Bookmark>();
             string[] terms = searchTerm.Split(new Char[] { ' ', '\n', '\t' }, StringSplitOptions.RemoveEmptyEntries);
@@ -50,10 +26,12 @@ namespace EDFPlugin.Cineblog01
                 RequestMaker requestMaker = new RequestMaker();
 
                 string listUrl = null;
-                if (searchSection == SearchSection.Movies) {
+                if (searchSection == SearchSection.Movies)
+                {
                     listUrl = Constants.Cineblog01ListaFilmUrl;
                 }
-                else if (searchSection == SearchSection.Series) {
+                else if (searchSection == SearchSection.Series)
+                {
                     listUrl = Constants.Cineblog01ListaSerieUrl;
                 }
 
@@ -78,7 +56,7 @@ namespace EDFPlugin.Cineblog01
 
                     links = table.SelectNodes("descendant::a");
                 }
-                else if(searchSection == SearchSection.Series)
+                else if (searchSection == SearchSection.Series)
                 {
                     links = doc.DocumentNode.SelectNodes("descendant::ul/li/a");
                 }
@@ -141,9 +119,6 @@ namespace EDFPlugin.Cineblog01
 
                 foreach (var article in articles)
                 {
-                    //var header = article.SelectSingleNode("descendant-or-self::div[@id='post-title']");
-                    //if (header == null)
-                    //    continue;
                     var link = article.ParentNode;
                     if (link == null || link.Name != "a")
                         continue;
