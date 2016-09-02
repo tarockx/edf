@@ -6,7 +6,6 @@ using System.Net;
 using System.Text;
 using HtmlAgilityPack;
 using libEraDeiFessi;
-using System.Text.RegularExpressions;
 
 namespace EDFPlugin.FilmPerTutti
 {
@@ -106,7 +105,7 @@ namespace EDFPlugin.FilmPerTutti
                     List<HtmlNode> flattened = new List<HtmlNode>();
                     Flatten(maindiv, flattened);
 
-                    ContentMetadata cm = ExtractMetadata(contentdiv);
+                    ContentMetadata cm = ExtractMetadata(contentdiv, maindiv);
 
                     var seasons = ExtractSeasons(flattened);
                     if (seasons != null && seasons.Count > 0)
@@ -139,7 +138,7 @@ namespace EDFPlugin.FilmPerTutti
         private HtmlContent ParseAsMovie(HtmlNode maindiv)
         {
             HtmlContent content = new HtmlContent();
-            string htmlres = "<html><body>\n";
+            string htmlres = "<html><head> <meta charset=\"UTF-8\" /></head><body>\n";
 
             var paragraphs = maindiv.SelectNodes("descendant::p");
             foreach (var p in paragraphs)
@@ -251,7 +250,7 @@ namespace EDFPlugin.FilmPerTutti
             return currentSeason;
         }
 
-        private ContentMetadata ExtractMetadata(HtmlNode section)
+        private ContentMetadata ExtractMetadata(HtmlNode section, HtmlNode maindiv)
         {
             ContentMetadata cm = new ContentMetadata();
 
@@ -266,7 +265,7 @@ namespace EDFPlugin.FilmPerTutti
             if(meta != null) //New layout
             {
                 //Cover image
-                var img = meta.SelectSingleNode("descendant::img[contains(@class, 'thumbnail']");
+                var img = meta.SelectSingleNode("descendant::img[contains(@class, 'thumbnail')]");
                 if(img != null)
                 {
                     cm.CoverImageUrl = img.GetAttributeValue("src", string.Empty);
@@ -282,6 +281,18 @@ namespace EDFPlugin.FilmPerTutti
             else
             {
                 //Old style
+                var paragraphs = maindiv.SelectNodes("descendant::p");
+                foreach (var p in paragraphs)
+                {
+                    var linkcount = p.SelectNodes("descendant::a")?.Count;
+                    var imgcount = p.SelectNodes("descendant::img")?.Count;
+
+                    if (imgcount.HasValue && imgcount > 0)
+                    {
+                        cm.CoverImageUrl = WebUtility.UrlEncode(p.SelectSingleNode("descendant::img").GetAttributeValue("src", string.Empty));
+                        cm.Description = ParsingHelpers.ConvertHtml(p.InnerHtml);
+                    }
+                }
             }
 
             return cm;
@@ -359,9 +370,9 @@ namespace EDFPlugin.FilmPerTutti
         {
             title = title.Trim();
             title = title.Replace("\n", " ");
-            while (title.EndsWith(" ") || title.EndsWith("-") || title.EndsWith("_"))
+            while (title.EndsWith(" ") || title.EndsWith("-") || title.EndsWith("_") || title.EndsWith(";"))
                 title = title.Substring(0, title.Length - 1);
-            return System.Net.WebUtility.HtmlDecode(title);
+            return WebUtility.HtmlDecode(title);
         }
     }
 }
