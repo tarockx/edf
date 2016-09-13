@@ -61,6 +61,10 @@
       <Project>{99fdf6e7-2cc3-473c-a50e-c15d6d3de708}</Project>
       <Name>EDFPlugin.AllUC</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EDFPlugin.Cineblog01\EDFPlugin.Cineblog01.csproj">
+      <Project>{59a66bf0-a934-4b6d-9292-9cc4016dcdb7}</Project>
+      <Name>EDFPlugin.Cineblog01</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EDFPlugin.Eurostreaming\EDFPlugin.Eurostreaming.csproj">
       <Project>{4ca7d797-a37e-47b4-a2f0-486080912c42}</Project>
       <Name>EDFPlugin.Eurostreaming</Name>
@@ -68,6 +72,10 @@
     <ProjectReference Include="..\EDFPlugin.Filespr\EDFPlugin.Filespr.csproj">
       <Project>{81f63868-c998-4beb-bb86-30199cb94209}</Project>
       <Name>EDFPlugin.Filespr</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EDFPlugin.FilmPerTutti\EDFPlugin.FilmPerTutti.csproj">
+      <Project>{8ad83a4f-4b61-417e-b531-fd6b2ada8fc7}</Project>
+      <Name>EDFPlugin.FilmPerTutti</Name>
     </ProjectReference>
     <ProjectReference Include="..\EDFPlugin.IlCorsaroNero\EDFPlugin.IlCorsaroNero.csproj">
       <Project>{e235941c-9df1-4cb5-9dd0-3d6119f78a8d}</Project>
@@ -81,9 +89,17 @@
       <Project>{47f8a809-7cd4-4fb0-bfd9-befcfc50c09d}</Project>
       <Name>EDFPlugin.PirateStreaming</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EDFPlugin.RARBG\EDFPlugin.RARBG.csproj">
+      <Project>{0779a77a-bd85-48b5-a0cb-fbddba2835da}</Project>
+      <Name>EDFPlugin.RARBG</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EDFPlugin.ShareDir\EDFPlugin.ShareDir.csproj">
       <Project>{4ef34258-bd9b-46c3-bc48-c86828410113}</Project>
       <Name>EDFPlugin.ShareDir</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EDFPlugin.ThePirateBay\EDFPlugin.ThePirateBay.csproj">
+      <Project>{98552122-7cfa-495a-96d6-c504dcae88a7}</Project>
+      <Name>EDFPlugin.ThePirateBay</Name>
     </ProjectReference>
     <ProjectReference Include="..\EDFPlugin.WarezBB\EDFPlugin.WarezBB.csproj">
       <Project>{f53d9b5d-bf38-4226-8de8-163b6df40152}</Project>

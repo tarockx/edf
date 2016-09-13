@@ -1,26 +1,15 @@
 ﻿using HtmlAgilityPack;
 using libEraDeiFessi;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
-using WatiN.Core;
-using WatiN.Core.Native.Windows;
 
-namespace EraDeiFessi.Parser
+
+namespace libEraDeiFessi
 {
-    class WebBypasser
+    public class WebBypasser
     {
-        static WebBypasser()
-        {
-            Settings.Instance.MakeNewIeInstanceVisible = false;
-            Settings.Instance.AutoMoveMousePointerToTopLeft = false;
-        }
 
         private static string[] supportedDomains = new string[] { "adf.ly", "q.gs", "cineblog01.pw", "swzz.xyz" };
 
@@ -53,6 +42,46 @@ namespace EraDeiFessi.Parser
         public static string BypassAdfLy(string link)
         {
             string resp = string.Empty;
+
+            try
+            {
+                RequestMaker rm = new RequestMaker();
+                resp = rm.MakeRequest(link);
+
+                string ysmm = string.Empty;
+                Regex regex = new Regex("var ysmm = '[A-Za-z0-9]+'");
+                Match match = regex.Match(resp);
+                
+                if(match != null)
+                {
+                    ysmm = match.Captures[0].Value.Replace("var ysmm = '", "").Replace("'", "").Trim();
+                }
+
+                string left = string.Empty;
+                string right = string.Empty;
+                for(int i = 0; i < ysmm.Length; i++)
+                {
+                    if (i % 2 == 0) {
+                        left += ysmm[i];
+                    }
+                    else
+                    {
+                        right = ysmm[i] + right;
+                    }
+                }
+
+                byte[] result_bytes = Convert.FromBase64String(left + right);
+                string result = Encoding.UTF8.GetString(result_bytes);
+
+                return result.Substring(2);
+            }
+            catch
+            {
+                return string.Empty;
+            }
+
+
+            /*
             var th = new Thread(() =>
             {
                 try
@@ -84,7 +113,7 @@ namespace EraDeiFessi.Parser
             th.Join();
 
             return resp;
-
+            */
         }
 
         public static string BypassCineblog01pw(string link, string referer)

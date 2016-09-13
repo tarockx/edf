@@ -47,6 +47,7 @@
     <Compile Include="CookieAwareWebClient.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Helpers\WebBypasser.cs" />
     <Compile Include="Plugins\PluginOptionsRepo.cs" />
     <Compile Include="Responses\ContentNestBlock.cs" />
     <Compile Include="Helpers\DomainExtractor.cs" />
@@ -73,9 +74,6 @@
       <Project>{193bb801-054f-4729-9d5d-fce1e32594bf}</Project>
       <Name>HtmlAgilityPack</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

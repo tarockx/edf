@@ -3,11 +3,11 @@ using libEraDeiFessi;
 
 namespace EDFPlugin.FilmPerTutti
 {
-    public class Plugin : IEDFPlugin, IEDFSearch, IEDFContentProvider
+    public class FPTPlugin : IEDFPlugin, IEDFSearch, IEDFContentProvider
     {
         private Parser parser;
 
-        public Plugin() { parser = new Parser(pluginID); }
+        public FPTPlugin() { parser = new Parser(pluginID); }
 
         public string pluginID
         {
