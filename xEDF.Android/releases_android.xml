@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfoCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<release>
+		<Version>1.0.4.0</Version>
+		<Notes>
+			Nuovo plugin: FilmPerTutti
+			Plugin riattivato: CB01
+			Fix vari
+		</Notes>
+	</release>
+	<release>
 		<Version>1.0.3.1</Version>
 		<Notes>
 			Supporto ai link multipli Real-Debrid (es: YouTube)

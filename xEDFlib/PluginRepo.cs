@@ -1,14 +1,15 @@
-﻿using System;
-
-using EDFPlugin.AllUC;
-//using EDFPlugin.Cineblog01;
+﻿using EDFPlugin.AllUC;
+using EDFPlugin.Cineblog01;
 using EDFPlugin.Eurostreaming;
 using EDFPlugin.Filespr;
 using EDFPlugin.IlCorsaroNero;
 using EDFPlugin.ItaliaSerie;
 using EDFPlugin.PirateStreaming;
 using EDFPlugin.ShareDir;
-//using EDFPlugin.WarezBB;
+using EDFPlugin.FilmPerTutti;
+using EDFPlugin.RARBG;
+using EDFPlugin.ThePirateBay;
+
 
 using System.Collections.Generic;
 using libEraDeiFessi.Plugins;
@@ -27,15 +28,18 @@ namespace xEDF
             AllUCStreamPlugin allucStreamPlugin = new AllUCStreamPlugin();
             Plugins.Add(allucStreamPlugin.pluginID, allucStreamPlugin);
 
-            //CBMoviePlugin cbMoviePlugin = new CBMoviePlugin();
-            //Plugins.Add(cbMoviePlugin.pluginID, cbMoviePlugin);
-            //CBSeriesPlugin cBSeriesPlugin = new CBSeriesPlugin();
-            //Plugins.Add(cBSeriesPlugin.pluginID, cBSeriesPlugin);
+            CBMoviePlugin cbMoviePlugin = new CBMoviePlugin();
+            Plugins.Add(cbMoviePlugin.pluginID, cbMoviePlugin);
+            CBSeriesPlugin cBSeriesPlugin = new CBSeriesPlugin();
+            Plugins.Add(cBSeriesPlugin.pluginID, cBSeriesPlugin);
             //CBCartoonPlugin cBCartoonPlugin = new CBCartoonPlugin();
             //Plugins.Add(cBCartoonPlugin.pluginID, cBCartoonPlugin);
 
             EurostreamingPlugin eurostreamingPlugin = new EurostreamingPlugin();
             Plugins.Add(eurostreamingPlugin.pluginID, eurostreamingPlugin);
+
+            FPTPlugin fptPlugin = new FPTPlugin();
+            Plugins.Add(fptPlugin.pluginID, fptPlugin);
 
             FsprPlugin fsprPlugin = new FsprPlugin();
             Plugins.Add(fsprPlugin.pluginID, fsprPlugin);
@@ -49,9 +53,14 @@ namespace xEDF
             PirateStreamingMoviesPlugin pirateStreamingMoviesPlugin = new PirateStreamingMoviesPlugin();
             Plugins.Add(pirateStreamingMoviesPlugin.pluginID, pirateStreamingMoviesPlugin);
 
+            RARBGPlugin rbgPlugin = new RARBGPlugin();
+            Plugins.Add(rbgPlugin.pluginID, rbgPlugin);
+
             SDPlugin sdPlugin = new SDPlugin();
             Plugins.Add(sdPlugin.pluginID, sdPlugin);
 
+            TPBPlugin tpbPlugin = new TPBPlugin();
+            Plugins.Add(tpbPlugin.pluginID, tpbPlugin);
         }
 
         public static List<IEDFPlugin> getPluginsSorted()

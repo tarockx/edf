@@ -24,30 +24,6 @@ namespace EDFPlugin.ThePirateBay
         {
             Constants.TPBBaseUrl = "https://pirateproxy.pl";
             return;
-
-            RequestMaker maker = new RequestMaker();
-            string result = maker.MakeRequest(Constants.ProxyBayUrl);
-
-            try
-            {
-                HtmlDocument doc = new HtmlDocument();
-                doc.LoadHtml(result);
-
-                var proxyNodes = doc.DocumentNode.SelectNodes("//td[@class='site']");
-                foreach (var item in proxyNodes)
-                {
-                    if (item.ParentNode.SelectSingleNode("descendant::td[@class='status']/img[@alt='up']") == null)
-                    {
-                        Constants.TPBBaseUrl = item.SelectSingleNode("descendant::a").GetAttributeValue("href", string.Empty);
-                        if (!string.IsNullOrEmpty(Constants.TPBBaseUrl))
-                            return;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                return;
-            }
         }
 
         public SearchResult PerformSearch(string searchTerm)

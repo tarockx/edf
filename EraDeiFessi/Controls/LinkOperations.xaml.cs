@@ -1,12 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using EraDeiFessi.Repository;
 using libEraDeiFessi;
 using EraDeiFessi.Helpers;
-using EraDeiFessi.Parser;
 using RealDebrid4DotNet.RestModel;
 
 namespace EraDeiFessi.Controls
@@ -81,7 +78,7 @@ namespace EraDeiFessi.Controls
 
         private void btnUnrestrict_Click(object sender, RoutedEventArgs e)
         {
-            if (Parser.WebBypasser.IsLinkSupported(EpisodeLink.Url))
+            if (WebBypasser.IsLinkSupported(EpisodeLink.Url))
                 BypassAndUnrestrict(EpisodeLink.Url);
             else
                 Unrestrict(EpisodeLink.Url);
@@ -90,7 +87,7 @@ namespace EraDeiFessi.Controls
         async private void BypassAndUnrestrict(string link)
         {
             ShowLoadingPanel("Sto tentando di bypassare il link protetto... attendere...");
-            string resp = await Parser.WebBypasser.BypassAsync(link, Referer);
+            string resp = await WebBypasser.BypassAsync(link, Referer);
             HideLoadingPanel();
 
             if (string.IsNullOrWhiteSpace(resp))
